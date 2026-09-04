@@ -5,7 +5,7 @@ import { API_BASE_URL, API_DIR, API_PORT, WEB_BASE_URL, WEB_DIR, WEB_PORT, apiEn
 const children = [];
 
 function run(command, args, options) {
-  const child = spawn(command, args, { stdio: 'pipe', ...options });
+  const child = spawn(command, args, { stdio: 'pipe', detached: true, ...options });
   children.push(child);
   const output = [];
   child.stdout?.on('data', (chunk) => output.push(String(chunk)));
@@ -73,10 +73,31 @@ export async function startWeb() {
 }
 
 export async function stopAll() {
-  for (const child of children) {
-    child.expectedExit = true;
-    child.kill('SIGTERM');
-  }
+  // Vite spawns its own child, so SIGTERM on the wrapper can leave a server
+  // holding the port and poisoning the next run. Kill the whole process group,
+  // then escalate to SIGKILL for anything still alive.
+  const stopping = [...children];
   children.length = 0;
+
+  for (const child of stopping) {
+    child.expectedExit = true;
+    try {
+      process.kill(-child.pid, 'SIGTERM');
+    } catch {
+      child.kill('SIGTERM');
+    }
+  }
+
+  await delay(500);
+
+  for (const child of stopping) {
+    if (child.exitCode === null && child.signalCode === null) {
+      try {
+        process.kill(-child.pid, 'SIGKILL');
+      } catch {
+        child.kill('SIGKILL');
+      }
+    }
+  }
   await delay(200);
 }

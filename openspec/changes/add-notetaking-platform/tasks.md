@@ -28,11 +28,11 @@ separately from code-zone work. `tasks.md` itself is exempt and may be ticked fr
 
 ### 2.1 platform-foundation
 
-- [ ] 2.1.1 platform-foundation: `an empty platform database` / `an initialized platform holding the seed administrator` — red → green → commit
-- [ ] 2.1.2 platform-foundation: `the platform is initialized` (and `initialized again`) — red → green → commit
-- [ ] 2.1.3 platform-foundation: `an administrator account named "X" exists` / `exactly one account named "X" exists` — red → green → commit
-- [ ] 2.1.4 platform-foundation: `that account holds the admin role` — red → green → commit
-- [ ] 2.1.5 platform-foundation: `Hans signs in as "X" with the password "Y"` and `he is signed in as an administrator` — red → green → commit
+- [x] 2.1.1 platform-foundation: `an empty platform database` / `an initialized platform holding the seed administrator` — red → green → commit
+- [x] 2.1.2 platform-foundation: `the platform is initialized` (and `initialized again`) — red → green → commit
+- [x] 2.1.3 platform-foundation: `an administrator account named "X" exists` / `exactly one account named "X" exists` — red → green → commit
+- [x] 2.1.4 platform-foundation: `that account holds the admin role` — red → green → commit
+- [x] 2.1.5 platform-foundation: `Hans signs in as "X" with the password "Y"` and `he is signed in as an administrator` — red → green → commit
 - [ ] 2.1.6 platform-foundation: `<person> owns a note titled "X"` — the shared note-fixture step used across most capabilities — red → green → commit
 - [ ] 2.1.7 platform-foundation: `<person> is signed in` — the shared session-fixture step — red → green → commit
 - [ ] 2.1.8 platform-foundation: `<person> deletes that note` and `the note is absent from her note list` — red → green → commit
