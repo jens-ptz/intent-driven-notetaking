@@ -85,16 +85,16 @@ separately from code-zone work. `tasks.md` itself is exempt and may be ticked fr
 
 ### 2.5 note-tagging
 
-- [ ] 2.5.1 note-tagging: `<person> tags a note with "X"`, `both notes carry the tag "Y"`, `the platform holds a single tag named "Y"` — normalization and lookup-or-create — red → green → commit
-- [ ] 2.5.2 note-tagging: `<person> tries to tag a note with "X"` and `the note is refused because the tag is invalid` — unsupported characters — red → green → commit
-- [ ] 2.5.3 note-tagging: `<person> tries to tag a note with a name of 33 characters` — the length bound — red → green → commit
-- [ ] 2.5.4 note-tagging: `<person> creates a note with no tags` and `the note carries no tags` — red → green → commit
-- [ ] 2.5.5 note-tagging: `<person> owns a note tagged "X"`, `<person> creates a note tagged "X"`, `both notes reference the same tag` — red → green → commit
-- [ ] 2.5.6 note-tagging: `<person> owns a note tagged "X" and "Y"`, `<person> updates the note with the single tag "X"`, `the note carries only the tag "X"` — whole-set replacement — red → green → commit
-- [ ] 2.5.7 note-tagging: `"X" is the only tag on <person>'s note`, `<person> removes "X" from that note`, `<person>'s note references the same tag that <person> used` — orphan retention — red → green → commit
-- [ ] 2.5.8 note-tagging: `<person> lists her notes filtered by the tag "X"` and `she sees only the note tagged "X"` — red → green → commit
+- [x] 2.5.1 note-tagging: `<person> tags a note with "X"`, `both notes carry the tag "Y"`, `the platform holds a single tag named "Y"` — normalization and lookup-or-create — red → green → commit
+- [x] 2.5.2 note-tagging: `<person> tries to tag a note with "X"` and `the note is refused because the tag is invalid` — unsupported characters — red → green → commit
+- [x] 2.5.3 note-tagging: `<person> tries to tag a note with a name of 33 characters` — the length bound — red → green → commit
+- [x] 2.5.4 note-tagging: `<person> creates a note with no tags` and `the note carries no tags` — red → green → commit
+- [x] 2.5.5 note-tagging: `<person> owns a note tagged "X"`, `<person> creates a note tagged "X"`, `both notes reference the same tag` — red → green → commit
+- [x] 2.5.6 note-tagging: `<person> owns a note tagged "X" and "Y"`, `<person> updates the note with the single tag "X"`, `the note carries only the tag "X"` — whole-set replacement — red → green → commit
+- [x] 2.5.7 note-tagging: `"X" is the only tag on <person>'s note`, `<person> removes "X" from that note`, `<person>'s note references the same tag that <person> used` — orphan retention — red → green → commit
+- [x] 2.5.8 note-tagging: `<person> lists her notes filtered by the tag "X"` and `she sees only the note tagged "X"` — red → green → commit
 - [ ] 2.5.9 note-tagging: `a visitor browses the public feed filtered by the tag "X"` and `only the note tagged "X" is listed` — red → green → commit
-- [ ] 2.5.10 note-tagging: filtering by an unknown tag yields `she sees no notes` — red → green → commit
+- [x] 2.5.10 note-tagging: filtering by an unknown tag yields `she sees no notes` — red → green → commit
 
 ### 2.6 note-publication
 
