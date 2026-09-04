@@ -1,6 +1,7 @@
 import pg from 'pg';
 import {
   API_DIR,
+  REPO_ROOT,
   DATABASE_URL,
   DB_NAME,
   MAINTENANCE_URL,
@@ -97,4 +98,27 @@ export async function closeDatabase() {
     await pool.end();
     pool = undefined;
   }
+}
+
+/** Stops the database container so the unhealthy health check can be observed. */
+export async function stopDatabase() {
+  if (pool) {
+    await pool.end();
+    pool = undefined;
+  }
+  await exec('docker', ['compose', 'stop', 'db'], { cwd: REPO_ROOT });
+}
+
+export async function startDatabase() {
+  await exec('docker', ['compose', 'start', 'db'], { cwd: REPO_ROOT });
+  const deadline = Date.now() + 60_000;
+  while (Date.now() < deadline) {
+    try {
+      await exec('docker', ['exec', 'notes-db', 'pg_isready', '-U', 'notes'], { cwd: REPO_ROOT });
+      return;
+    } catch {
+      await new Promise((resolve) => setTimeout(resolve, 500));
+    }
+  }
+  throw new Error('The database never came back after being stopped');
 }

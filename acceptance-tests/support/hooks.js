@@ -7,6 +7,7 @@ import {
   ensureDatabase,
   migrate,
   resetToSeededState,
+  startDatabase,
 } from './database.js';
 import { exec, startApi, startWeb, stopAll } from './processes.js';
 
@@ -48,6 +49,12 @@ Before(async function () {
 });
 
 After(async function () {
+  // A scenario that took the database away puts it back, so the next
+  // scenario's reset finds something to reset.
+  if (this.databaseStopped) {
+    await startDatabase();
+    this.databaseStopped = false;
+  }
   await closeScenarioBrowser(this);
 });
 

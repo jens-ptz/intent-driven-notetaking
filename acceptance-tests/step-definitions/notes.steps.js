@@ -12,7 +12,8 @@ import {
 
 // --- fixtures ---------------------------------------------------------------
 
-Given('{word} is signed in', async function (person) {
+// A capitalised name, so this never captures a pronoun such as "she".
+Given(/^([A-Z]\w+) is signed in$/, async function (person) {
   await ensureSignedIn(this, person);
 });
 

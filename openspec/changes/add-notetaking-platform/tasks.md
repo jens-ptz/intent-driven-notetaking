@@ -35,12 +35,12 @@ separately from code-zone work. `tasks.md` itself is exempt and may be ticked fr
 - [x] 2.1.5 platform-foundation: `Hans signs in as "X" with the password "Y"` and `he is signed in as an administrator` — red → green → commit
 - [x] 2.1.6 platform-foundation: `<person> owns a note titled "X"` — the shared note-fixture step used across most capabilities — red → green → commit
 - [x] 2.1.7 platform-foundation: `<person> is signed in` — the shared session-fixture step — red → green → commit
-- [ ] 2.1.8 platform-foundation: `<person> deletes that note` and `the note is absent from her note list` — red → green → commit
-- [ ] 2.1.9 platform-foundation: `reading that note reports it does not exist` — red → green → commit
-- [ ] 2.1.10 platform-foundation: `<person> has deleted her note titled "X"`, `Hans lists all notes as an administrator`, `the note titled "X" is absent from the results` — red → green → commit
+- [x] 2.1.8 platform-foundation: `<person> deletes that note` and `the note is absent from her note list` — red → green → commit
+- [x] 2.1.9 platform-foundation: `reading that note reports it does not exist` — red → green → commit
+- [x] 2.1.10 platform-foundation: `<person> has deleted her note titled "X"`, `Hans lists all notes as an administrator`, `the note titled "X" is absent from the results` — red → green → commit
 - [x] 2.1.11 platform-foundation: `<person> creates a note titled "X"` and `the identifier of "X" is greater than the identifier of "Y"` — red → green → commit
-- [ ] 2.1.12 platform-foundation: `the API is running against an initialized database`, `the health of the platform is checked`, `the platform reports itself healthy` — red → green → commit
-- [ ] 2.1.13 platform-foundation: `the API is running and the database is unreachable` and `the platform reports itself unhealthy` — red → green → commit
+- [x] 2.1.12 platform-foundation: `the API is running against an initialized database`, `the health of the platform is checked`, `the platform reports itself healthy` — red → green → commit
+- [x] 2.1.13 platform-foundation: `the API is running and the database is unreachable` and `the platform reports itself unhealthy` — red → green → commit
 
 ### 2.2 user-accounts
 
@@ -60,16 +60,16 @@ separately from code-zone work. `tasks.md` itself is exempt and may be ticked fr
 
 ### 2.3 authentication
 
-- [ ] 2.3.1 authentication: `<person> holds an account with the email "X" and the user name "Y"` — red → green → commit
-- [ ] 2.3.2 authentication: `<person> signs in with the identifier "X" and her password` and `she is signed in` — covers both the email and the user-name scenario — red → green → commit
-- [ ] 2.3.3 authentication: `<person> signs in as "X" with a wrong password`, `someone signs in as "nobody" with any password`, `both attempts are refused with the same message` — red → green → commit
-- [ ] 2.3.4 authentication: `<person>'s account is banned` and `sign-in is refused because the account is banned` — red → green → commit
-- [ ] 2.3.5 authentication: `<person> has deleted her account` and `sign-in is refused` — red → green → commit
-- [ ] 2.3.6 authentication: `<person> has signed in`, `<person> lists her notes`, `the notes are returned` — red → green → commit
-- [ ] 2.3.7 authentication: `no one is signed in`, `the note list is requested`, `the request is refused as unauthenticated` — red → green → commit
-- [ ] 2.3.8 authentication: `<person> signs out` — red → green → commit
-- [ ] 2.3.9 authentication: `<person> is signed in with a valid session`, `Hans bans <person>'s account`, `the request is refused because the account is banned` — the per-request revalidation of ADR-0003 — red → green → commit
-- [ ] 2.3.10 authentication: `Hans deletes <person>'s account` mid-session, refused as unauthenticated on the next request — red → green → commit
+- [x] 2.3.1 authentication: `<person> holds an account with the email "X" and the user name "Y"` — red → green → commit
+- [x] 2.3.2 authentication: `<person> signs in with the identifier "X" and her password` and `she is signed in` — covers both the email and the user-name scenario — red → green → commit
+- [x] 2.3.3 authentication: `<person> signs in as "X" with a wrong password`, `someone signs in as "nobody" with any password`, `both attempts are refused with the same message` — red → green → commit
+- [x] 2.3.4 authentication: `<person>'s account is banned` and `sign-in is refused because the account is banned` — red → green → commit
+- [x] 2.3.5 authentication: `<person> has deleted her account` and `sign-in is refused` — red → green → commit
+- [x] 2.3.6 authentication: `<person> has signed in`, `<person> lists her notes`, `the notes are returned` — red → green → commit
+- [x] 2.3.7 authentication: `no one is signed in`, `the note list is requested`, `the request is refused as unauthenticated` — red → green → commit
+- [x] 2.3.8 authentication: `<person> signs out` — red → green → commit
+- [x] 2.3.9 authentication: `<person> is signed in with a valid session`, `Hans bans <person>'s account`, `the request is refused because the account is banned` — the per-request revalidation of ADR-0003 — red → green → commit
+- [x] 2.3.10 authentication: `Hans deletes <person>'s account` mid-session, refused as unauthenticated on the next request — red → green → commit
 
 ### 2.4 note-management
 
@@ -118,19 +118,19 @@ separately from code-zone work. `tasks.md` itself is exempt and may be ticked fr
 
 ### 2.7 platform-administration
 
-- [ ] 2.7.1 platform-administration: `Hans lists all notes as an administrator` across owners and `he sees both "X" and "Y"` — red → green → commit
-- [ ] 2.7.2 platform-administration: `Hans reads that note as an administrator` and `he sees its title and text` — red → green → commit
-- [ ] 2.7.3 platform-administration: `Hans changes its title to "X"` and the owner's list reflects it — red → green → commit
-- [ ] 2.7.4 platform-administration: `Hans deletes that note as an administrator` — red → green → commit
-- [ ] 2.7.5 platform-administration: `Hans opens the moderation queue`, `it holds "X"`, `it does not hold "Y" or "Z"` — red → green → commit
-- [ ] 2.7.6 platform-administration: `<person> requested publication of "X" before <person> requested publication of "Y"` and `"X" is listed before "Y"` — queue ordering — red → green → commit
-- [ ] 2.7.7 platform-administration: `<person> holds a live account`, `Hans bans <person>'s account`, `<person> cannot sign in` — red → green → commit
-- [ ] 2.7.8 platform-administration: `Hans unbans <person>'s account` and `<person> can sign in with her existing password` — red → green → commit
-- [ ] 2.7.9 platform-administration: `Hans tries to ban his own account`, `the attempt is refused`, `Hans can still sign in` — red → green → commit
-- [ ] 2.7.10 platform-administration: `Hans deletes <person>'s account as an administrator` with the full cascade — red → green → commit
-- [ ] 2.7.11 platform-administration: `Hans tries to delete his own account as an administrator` and `the attempt is refused` — red → green → commit
-- [ ] 2.7.12 platform-administration: `<person> tries to list all notes as an administrator` / `open the moderation queue` / `ban <person>'s account`, and `every attempt is refused as forbidden` — red → green → commit
-- [ ] 2.7.13 platform-administration: `the moderation queue is requested` unauthenticated and `the request is refused as unauthenticated` — red → green → commit
+- [x] 2.7.1 platform-administration: `Hans lists all notes as an administrator` across owners and `he sees both "X" and "Y"` — red → green → commit
+- [x] 2.7.2 platform-administration: `Hans reads that note as an administrator` and `he sees its title and text` — red → green → commit
+- [x] 2.7.3 platform-administration: `Hans changes its title to "X"` and the owner's list reflects it — red → green → commit
+- [x] 2.7.4 platform-administration: `Hans deletes that note as an administrator` — red → green → commit
+- [x] 2.7.5 platform-administration: `Hans opens the moderation queue`, `it holds "X"`, `it does not hold "Y" or "Z"` — red → green → commit
+- [x] 2.7.6 platform-administration: `<person> requested publication of "X" before <person> requested publication of "Y"` and `"X" is listed before "Y"` — queue ordering — red → green → commit
+- [x] 2.7.7 platform-administration: `<person> holds a live account`, `Hans bans <person>'s account`, `<person> cannot sign in` — red → green → commit
+- [x] 2.7.8 platform-administration: `Hans unbans <person>'s account` and `<person> can sign in with her existing password` — red → green → commit
+- [x] 2.7.9 platform-administration: `Hans tries to ban his own account`, `the attempt is refused`, `Hans can still sign in` — red → green → commit
+- [x] 2.7.10 platform-administration: `Hans deletes <person>'s account as an administrator` with the full cascade — red → green → commit
+- [x] 2.7.11 platform-administration: `Hans tries to delete his own account as an administrator` and `the attempt is refused` — red → green → commit
+- [x] 2.7.12 platform-administration: `<person> tries to list all notes as an administrator` / `open the moderation queue` / `ban <person>'s account`, and `every attempt is refused as forbidden` — red → green → commit
+- [x] 2.7.13 platform-administration: `the moderation queue is requested` unauthenticated and `the request is refused as unauthenticated` — red → green → commit
 
 ### 2.8 web-client — Playwright-backed page objects, `web` profile
 
