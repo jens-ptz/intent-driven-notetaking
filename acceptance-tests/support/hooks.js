@@ -44,7 +44,11 @@ async function waitForPostgres() {
 // Every scenario starts from an empty database plus the guaranteed
 // administrator, so scenarios are order-independent and none inherits another's
 // leftovers.
-Before(async function () {
+Before(async function ({ pickle }) {
+  // A handful of steps ("Priya signs out", "she is signed in") mean one thing
+  // over HTTP and another in a browser. The feature path is what distinguishes
+  // them, exactly as the cucumber profiles do.
+  this.isWeb = pickle.uri.includes('web-client');
   await resetToSeededState();
 });
 

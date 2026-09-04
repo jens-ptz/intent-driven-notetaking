@@ -9,11 +9,16 @@ import {
   publicFeed,
   publishNote,
 } from '../support/actors.js';
+import { signInBrowser } from '../support/browser-session.js';
 
 // --- fixtures ---------------------------------------------------------------
 
 // A capitalised name, so this never captures a pronoun such as "she".
 Given(/^([A-Z]\w+) is signed in$/, async function (person) {
+  if (this.isWeb) {
+    await signInBrowser(this, person);
+    return;
+  }
   await ensureSignedIn(this, person);
 });
 

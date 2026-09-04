@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { Given, Then, When } from '@cucumber/cucumber';
 import { ADMIN, ensureSignedIn, registerAndSignIn } from '../support/actors.js';
 import { API_BASE_URL } from '../support/config.js';
+import { browserPages } from '../support/browser-session.js';
 import { startDatabase, stopDatabase } from '../support/database.js';
 
 Given('no one is signed in', function () {
@@ -63,7 +64,13 @@ When('someone signs in as {string} with any password', async function (identifie
   this.unknownIdentifierOutcome = { status: this.lastResponse.status, body: this.lastBody };
 });
 
-Then('she is signed in', function () {
+Then('she is signed in', async function () {
+  if (this.isWeb) {
+    const { noteList } = await browserPages(this);
+    await this.page.getByTestId('nav-my-notes').waitFor();
+    assert.ok(await noteList.isOffered(), 'the signed-in navigation is not showing');
+    return;
+  }
   assert.equal(this.lastResponse.status, 200, JSON.stringify(this.lastBody));
 });
 
@@ -112,6 +119,12 @@ When('the note list is requested', async function () {
 });
 
 When('{word} signs out', async function (person) {
+  if (this.isWeb) {
+    const { noteList } = await browserPages(this);
+    await noteList.open();
+    await this.page.getByTestId('sign-out').click();
+    return;
+  }
   await this.post(person, '/auth/logout');
 });
 

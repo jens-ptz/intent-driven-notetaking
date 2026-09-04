@@ -1,124 +1,106 @@
-# Intent-Driven Template
+# Notes
 
-An [OpenSpec](https://github.com/Fission-AI/OpenSpec) and [OpenCode](https://opencode.ai/) template with the `proposal -> specs -> design -> adr -> tasks` workflow enabled, plus optional collaboration workflows for teams that choose to adopt them.
+A small note-taking platform with moderated public sharing: a NestJS + Prisma API,
+a React + Vite client, PostgreSQL in Docker, and an acceptance suite that executes
+the OpenSpec specifications directly.
 
-## Walkthrough
+It exists to exercise the full OpenSpec lifecycle — `proposal → specs → design →
+adr → tasks → apply` — on something with real authorization, lifecycle and
+moderation behaviour. The change that built it is
+`openspec/changes/add-notetaking-platform/`; the decisions it committed to are in
+[`adr/`](adr/); the vocabulary is in [`glossary/`](glossary/).
 
-Read the full walkthrough: [Spec-Driven Development with OpenSpec and OpenCode](https://intent-driven.dev/blog/2026/05/10/spec-driven-development-openspec-opencode/).
+## Prerequisites
 
-[![Spec-Driven Development with OpenSpec and OpenCode](https://img.youtube.com/vi/M3dp9u1wZes/maxresdefault.jpg)](https://www.youtube.com/watch?v=M3dp9u1wZes)
+- Node 22+ with corepack (`corepack enable` gives you the pinned pnpm)
+- Docker with Compose v2
+- For the browser scenarios: `pnpm --filter @notes/acceptance-tests exec playwright install chromium`
 
-Read the full walkthrough: [SDD with Multi-Model Spec Review and Glossary](https://intent-driven.dev/blog/2026/06/27/sdd-adversarial-authoring-glossary/)
+## First run
 
-[![Spec-Driven Development Multi-Model Adversarial Authoring and Glossary with OpenCode and OpenSpec](https://img.youtube.com/vi/2V78VVJ1sa0/maxresdefault.jpg)](https://www.youtube.com/watch?v=2V78VVJ1sa0)
-
-## How To Use This Template
-
-### Start A New Project From This Template
-
-Clone this repository, open it with OpenCode, and start working from the bundled
-OpenSpec configuration, commands, skills, and schema.
-
-### Add This Template To An Existing Project
-
-Open your existing project with OpenCode and ask it to install the template:
-
-```text
-Read and understand https://raw.githubusercontent.com/intent-driven-dev/intent-driven-template/refs/heads/main/INSTALL_TEMPLATE.md and follow the instructions there.
+```sh
+cp .env.example .env          # local defaults; see "The seeded administrator"
+pnpm install
+pnpm db:up                    # PostgreSQL 16 on port 5433
+pnpm migrate                  # applies the schema, including the partial unique indexes
+pnpm seed                     # guarantees hans.admin exists - safe to re-run
+pnpm dev                      # API on :3000, web on :5273
 ```
 
-## What This Template Uses
+Open <http://localhost:5273>. The API is at `http://localhost:3000/api/v1`, with a
+health check at `/api/v1/health`.
 
-- OpenSpec for setup, proposal, specification, design, ADR, and task artifacts.
-- Custom schemas from https://github.com/intent-driven-dev/openspec-schemas.
-- A bundled local copy of the `intent-driven` custom schema from
-  https://github.com/intent-driven-dev/openspec-schemas/tree/main/openspec/schemas/intent-driven
-  for the full `proposal -> specs -> design -> adr -> tasks` lifecycle.
-- OpenSpec git discipline so proposals land on `main` before apply, and
-  implementation lands on `main` before archive.
-- OpenCode skills for repeatable collaboration and implementation workflows,
-  including C4 diagrams, ADR authoring, and OpenSpec lifecycle commands.
-- Superpowers from https://github.com/obra/superpowers for guided practices such
-  as brainstorming, planning, debugging, verification, worktrees, and
-  subagent-driven parallel work.
-- Superpowers can be disabled by removing the `superpowers@git+https://github.com/obra/superpowers.git`
-  entry from the `plugin` array in `opencode.json`, then restarting OpenCode.
-- A bundled `test-driven-development` skill plus `senior-dev` and `senior-qa`
-  subagents in `.opencode/agent/` for test-first implementation and
-  acceptance-test work, routed via the `context` block in `openspec/config.yaml`.
-- A `grill-me` style of rigorous design interrogation, inspired by
-  https://github.com/mattpocock/skills/blob/main/skills/productivity/grill-me/SKILL.md.
-- ADRs for durable architectural decisions.
-- C4 diagrams for communicating architecture boundaries and relationships.
-- Gherkin-style requirements and scenarios for observable behaviour.
+Ports 5432 and 5173 are the conventional defaults and are frequently taken by a
+native PostgreSQL or another Vite project, so this repository defaults to 5433 and
+5273. Both are overridable in `.env`.
 
-The bundled OpenSpec schema is a local copy of the `intent-driven` schema from
-https://github.com/intent-driven-dev/openspec-schemas/tree/main/openspec/schemas/intent-driven.
+## The seeded administrator
 
-## Workflow
+Every environment is guaranteed to hold an administrator account:
 
-The intent-driven workflow moves through these artifacts in order:
+| user name    | password    |
+| ------------ | ----------- |
+| `hans.admin` | `p@assw0rt` |
 
-```text
-proposal -> specs -> design -> adr -> tasks
+The password comes from `SEED_ADMIN_PASSWORD` in `.env`, and the default is that
+well-known value.
+
+**This platform is local-only until you change it.** A known credential with the
+admin role exists by construction, and nothing else in the system compensates for
+it. Set `SEED_ADMIN_PASSWORD` to something private *before* the first `pnpm seed`
+in any environment another person can reach. Re-seeding never overwrites an
+existing account, so changing the variable later does not rotate a password that
+is already in the database.
+
+## Running the specifications
+
+```sh
+pnpm test:acceptance          # everything: 93 scenarios, API and browser
+pnpm lint:specs               # extract the Gherkin and lint it
 ```
 
-- `proposal` captures why the change matters.
-- `specs` describe observable behaviour with Gherkin-style scenarios.
-- `design` explains the implementation approach and trade-offs.
-- `adr` records durable architectural decisions.
-- `tasks` turn the accepted intent, behaviour, design, and decisions into work.
+Or from `acceptance-tests/`: `pnpm test:api` for the fast loop without a
+browser, `pnpm test:web` for the browser scenarios only. You do not need to
+start anything first — the suite brings up the database, creates its own
+`notes_test` database, builds and boots the API, boots Vite, and shuts it all
+down again. It never touches your development database. Every run writes an
+HTML report under `acceptance-tests/reports/`.
 
-## Schema
+The `.feature` files under `acceptance-tests/.extracted/` are generated from the
+`spec.md` files and preserve line numbers exactly: a failure at
+`spec.feature:42` is line 42 of the corresponding `spec.md`. Never edit them.
+See [`acceptance-tests/README.md`](acceptance-tests/README.md).
 
-`openspec/config.yaml` already selects the bundled [`intent-driven` schema](openspec/schemas/intent-driven/schema.yaml). Learn how to tailor artifact workflows in [OpenSpec Custom Schemas](https://intent-driven.dev/blog/2026/02/12/openspec-custom-schemas/).
+## Layout
 
-## Skills
+```
+apps/api/            NestJS + Prisma; routes are authenticated unless marked @Public
+apps/web/            React + Vite SPA; markdown is rendered sanitized, raw HTML is never enabled
+packages/shared/     DTO types both sides import
+acceptance-tests/    cucumber-js + Playwright; the executable specification
+openspec/            proposal, specs, design, ADR manifest and tasks for each change
+adr/                 durable architectural decisions, immutable once accepted
+glossary/            business and technical vocabulary the artifacts use
+docker-compose.yml   PostgreSQL
+```
 
-Standard OpenSpec lifecycle skills in `.opencode/skills/` — names are self-explanatory:
-`openspec-new-change`, `openspec-propose`, `openspec-continue-change`, `openspec-explore`,
-`openspec-apply-change`, `openspec-verify-change`, `openspec-sync-specs`, `openspec-archive-change`
+## How the platform behaves
 
-| Skill | Location | Purpose | Enabled Or Updated By |
-|-------|----------|---------|-----------------------|
-| `openspec-bulk-apply-change` | `.opencode/skills/` | Applies multiple active changes concurrently in isolated worktrees with parallel verification. | Invoke directly with `/opsx:bulk-apply` command when applying multiple active openspec changes. |
-| `adversarial-authoring` | `.opencode/skills/` | Runs author and reviewer agents in sequence to reduce model bias in drafts. | Refer to the skill under rule in the rules section of `openspec/config.yaml`. |
-| `grill-me` | `.agents/skills/` | Interrogates plans and designs with probing questions to surface hidden assumptions. | Refer to this skill under rules section in `openspec/config.yaml`. |
-| `c4-diagrams` | `.agents/skills/` | Visualises system architecture using C4 model levels in ASCII or Mermaid. | Refer to this skill under `design` rule in `openspec/config.yaml`. |
-| `architectural-decision-records` | `.agents/skills/` | Captures architectural decisions with rationale, tradeoffs, and supersession chains. | Automatically invoked or can be explicilty referred to under `adr` rule in `openspec/config.yaml`. |
-| `gherkin-authoring` | `.agents/skills/` | Drafts and improves Gherkin scenarios for observable, domain-language behaviour. | Required by `spec-as-source` during the `specs` phase. |
-| `glossary` | `.agents/skills/` | Maintains business and technical terminology and companion glossary references for specification artifacts. | Can be referred to under `proposal` and/or `design` rule in `openspec/config.yaml`. |
-| `openspec-git-discipline` | `.agents/skills/` | Enforces that proposals reach `main` before apply, and implementation merges before archive. | Enabled through `AGENTS.md`. |
-| `spec-as-source` | `.agents/skills/` | Adds executable acceptance specifications to the intent-driven workflow. | Explicitly opt in by uncommenting both the `specs` and `tasks` rules in `openspec/config.yaml`. |
-| `acceptance-test-authoring` | `.agents/skills/` | Configures the acceptance runner, extraction, linting, and step definitions for `spec-as-source`. | Required by `spec-as-source` when configuring or changing acceptance-test infrastructure. |
-| `test-driven-development` | `.agents/skills/` | Guides strict red-green-refactor TDD: one behaviour per test, minimal implementation to pass, refactoring on green, with best-practice patterns and collaborator mocking guidance. | Loaded by the `senior-dev` agent in `.opencode/agent/senior-dev.md`; enable by uncommenting the `context` lines in `openspec/config.yaml` that route src work to `senior-dev`. |
+- Deletes are always soft. A deleted account releases its email and user name for
+  re-registration, enforced by partial unique indexes scoped to live rows.
+- A ban or an account deletion takes effect on the very next request, because the
+  auth guard reloads the account every time rather than trusting the token.
+- A note becomes public only through a request an administrator approves. Editing a
+  published note sends it back for approval, so what is public is always what was
+  approved.
+- The public feed is readable without an account and omits notes whose owner is
+  banned or deleted.
 
-Example configurations are available in `openspec/config.yaml` and `AGENTS.md`. You can comment/uncomment the skill references to enable them.
+The full behaviour is specified, scenario by scenario, under
+`openspec/changes/add-notetaking-platform/specs/`.
 
-## Experimental: Spec As Source
+## About this repository's template
 
-The `spec-as-source` skill is an opt-in layer on the intent-driven schema that uses fenced Gherkin in OpenSpec specifications as the source for generating acceptance tests. To enable `spec-as-source` capability add the skill reference under both the `specs` and `tasks` rules in `openspec/config.yaml`.
-
-During `specs`, `spec-as-source` requires `gherkin-authoring` to author the fenced Gherkin scenarios. During `tasks`, it replaces the standard task template with acceptance-test-first work: configure and run the acceptance suite, then implement application work. Use `acceptance-test-authoring` to configure the runner, extraction, linting, and step definitions that execute the specifications. See [Behavior-Driven Development and Spec-Driven Development with OpenSpec](https://intent-driven.dev/blog/2026/07/17/behavior-driven-development-sdd-openspec/).
-
-## Further Reading
-
-- Template overview: [Spec-Driven Development with OpenSpec and OpenCode](https://intent-driven.dev/blog/2026/05/10/spec-driven-development-openspec-opencode/)
-- Schema customization: [OpenSpec Custom Schemas](https://intent-driven.dev/blog/2026/02/12/openspec-custom-schemas/)
-- Durable architecture: [Architectural Decision Records with Spec-Driven Development using OpenSpec](https://intent-driven.dev/blog/2026/04/29/spec-driven-development-with-adr/)
-- Multi-model review and glossary: [SDD with Multi-Model Spec Review and Glossary](https://intent-driven.dev/blog/2026/06/27/sdd-adversarial-authoring-glossary/)
-- Parallel implementation: [OpenSpec, Git WorkTrees and OpenCode](https://intent-driven.dev/blog/2026/04/01/openspec-git-worktrees-opencode/)
-- Spec-As-Source Spec-Driven Development: [Behavior-Driven Development and Spec-Driven Development with OpenSpec](https://intent-driven.dev/blog/2026/07/17/behavior-driven-development-sdd-openspec/)
-- Brownfield adoption: [Spec-Driven Development with Brownfield Projects](https://intent-driven.dev/blog/2026/03/10/spec-driven-development-brownfield/)
-- SDD + BDD + TDD: [How TDD and BDD Actually Fit Into Spec-Driven Development](https://intent-driven.dev/blog/2026/08/23/tdd-bdd-spec-driven-development/)
-
-## Agents
-
-Specialist agents used within skills, in `.opencode/agent/`:
-
-| Agent | Purpose |
-|-------|---------|
-| `adversarial-author` | Writes an initial draft of a specification artifact or design document. |
-| `adversarial-reviewer` | Reviews the author's draft with challenges and improvement suggestions. |
-| `senior-dev` | Implements src work test-first through strict red-green-refactor, following the `test-driven-development` skill. |
-| `senior-qa` | Authors acceptance tests, step definitions, and runner configuration, following the `acceptance-test-authoring` skill. |
+This project was started from the intent-driven OpenSpec template. The template's
+own notes on the workflow, skills and schema are preserved in
+[`INSTALL_TEMPLATE.md`](INSTALL_TEMPLATE.md) and `openspec/schemas/intent-driven/README.md`.

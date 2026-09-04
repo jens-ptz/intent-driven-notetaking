@@ -134,30 +134,30 @@ separately from code-zone work. `tasks.md` itself is exempt and may be ticked fr
 
 ### 2.8 web-client — Playwright-backed page objects, `web` profile
 
-- [ ] 2.8.1 web-client: page-object scaffolding — landing page, sign-in, registration, note list, editor and admin area objects exposing intent-level methods, waiting on visible state rather than timeouts — red → green → commit
-- [ ] 2.8.2 web-client: `a visitor with no account opens the landing page` and `"X" is shown in the public feed` — red → green → commit
-- [ ] 2.8.3 web-client: `a visitor opens that note`, `"X" is shown as a heading`, `"Y" is shown in italics` — markdown rendering — red → green → commit
-- [ ] 2.8.4 web-client: `a published note whose text contains an embedded script tag`, `the script does not run`, `its markup is not added to the page` — the sanitization guarantee of ADR-0006 — red → green → commit
-- [ ] 2.8.5 web-client: `<person> completes the registration form with valid details`, `she is signed in`, `her note list is shown` — red → green → commit
-- [ ] 2.8.6 web-client: `<person> submits the sign-in form with a wrong password`, `she is shown a sign-in error`, `she is not signed in` — red → green → commit
-- [ ] 2.8.7 web-client: `<person> signs out`, `the public feed is shown`, `no note list is offered` — red → green → commit
-- [ ] 2.8.8 web-client: `<person> opens her note list`, `"X" is shown as private`, `"Y" is shown as published` — red → green → commit
-- [ ] 2.8.9 web-client: `<person> deletes it from her note list` and `"X" is no longer listed` — red → green → commit
-- [ ] 2.8.10 web-client: `<person> is editing a note`, `<person> types "X" into the editor`, `the preview shows "X" as a heading` — red → green → commit
-- [ ] 2.8.11 web-client: `<person> enters the tags "X" and "Y"`, `<person> saves the note`, `the note is shown with the tags "x" and "y"` — red → green → commit
-- [ ] 2.8.12 web-client: `<person> requests publication from the editor` and `the note is shown as pending publication` — red → green → commit
-- [ ] 2.8.13 web-client: `Hans rejected <person>'s note "X" with the reason "Y"` and `she is shown the rejection reason "Y"` — red → green → commit
-- [ ] 2.8.14 web-client: `Hans opens the moderation queue and approves "X"` and `"X" is shown in the public feed` — red → green → commit
-- [ ] 2.8.15 web-client: `Hans bans <person> from the account list` and `<person> is shown as banned in the account list` — red → green → commit
-- [ ] 2.8.16 web-client: `<person> navigates to the administration area`, `she is refused access`, `no administration navigation is offered to her` — red → green → commit
-- [ ] 2.8.17 web-client: add the editor's warning that saving a published note sends it back for approval, as the design's mitigation for ADR-0005 — red → green → commit
+- [x] 2.8.1 web-client: page-object scaffolding — landing page, sign-in, registration, note list, editor and admin area objects exposing intent-level methods, waiting on visible state rather than timeouts — red → green → commit
+- [x] 2.8.2 web-client: `a visitor with no account opens the landing page` and `"X" is shown in the public feed` — red → green → commit
+- [x] 2.8.3 web-client: `a visitor opens that note`, `"X" is shown as a heading`, `"Y" is shown in italics` — markdown rendering — red → green → commit
+- [x] 2.8.4 web-client: `a published note whose text contains an embedded script tag`, `the script does not run`, `its markup is not added to the page` — the sanitization guarantee of ADR-0006 — red → green → commit
+- [x] 2.8.5 web-client: `<person> completes the registration form with valid details`, `she is signed in`, `her note list is shown` — red → green → commit
+- [x] 2.8.6 web-client: `<person> submits the sign-in form with a wrong password`, `she is shown a sign-in error`, `she is not signed in` — red → green → commit
+- [x] 2.8.7 web-client: `<person> signs out`, `the public feed is shown`, `no note list is offered` — red → green → commit
+- [x] 2.8.8 web-client: `<person> opens her note list`, `"X" is shown as private`, `"Y" is shown as published` — red → green → commit
+- [x] 2.8.9 web-client: `<person> deletes it from her note list` and `"X" is no longer listed` — red → green → commit
+- [x] 2.8.10 web-client: `<person> is editing a note`, `<person> types "X" into the editor`, `the preview shows "X" as a heading` — red → green → commit
+- [x] 2.8.11 web-client: `<person> enters the tags "X" and "Y"`, `<person> saves the note`, `the note is shown with the tags "x" and "y"` — red → green → commit
+- [x] 2.8.12 web-client: `<person> requests publication from the editor` and `the note is shown as pending publication` — red → green → commit
+- [x] 2.8.13 web-client: `Hans rejected <person>'s note "X" with the reason "Y"` and `she is shown the rejection reason "Y"` — red → green → commit
+- [x] 2.8.14 web-client: `Hans opens the moderation queue and approves "X"` and `"X" is shown in the public feed` — red → green → commit
+- [x] 2.8.15 web-client: `Hans bans <person> from the account list` and `<person> is shown as banned in the account list` — red → green → commit
+- [x] 2.8.16 web-client: `<person> navigates to the administration area`, `she is refused access`, `no administration navigation is offered to her` — red → green → commit
+- [x] 2.8.17 web-client: add the editor's warning that saving a published note sends it back for approval, as the design's mitigation for ADR-0005 — red → green → commit
 
 ## 3. Completion
 
-- [ ] 3.1 Run `npm run lint:specs` in `acceptance-tests/` and resolve every gherkin-lint finding
-- [ ] 3.2 Run the full suite: every scenario passes, zero pending and zero undefined steps, HTML report generated under `acceptance-tests/reports/`
-- [ ] 3.3 Verify the profiles in isolation: the browser-only profile and the API-only profile each run and pass on their own
+- [x] 3.1 Run `npm run lint:specs` in `acceptance-tests/` and resolve every gherkin-lint finding
+- [x] 3.2 Run the full suite: every scenario passes, zero pending and zero undefined steps, HTML report generated under `acceptance-tests/reports/`
+- [x] 3.3 Verify the profiles in isolation: the browser-only profile and the API-only profile each run and pass on their own
 - [ ] 3.4 Confirm `docker compose down -v` followed by compose up, migrate, seed and the suite reproduces a green run from nothing
-- [ ] 3.5 Run `openspec validate add-notetaking-platform --type change --strict` and resolve any finding before archive
-- [ ] 3.6 Check the code zone against the design: no `rehype-raw` anywhere in the dependency tree, the partial unique indexes present in the applied migration, and no read path missing its `deletedAt` filter
-- [ ] 3.7 Write the root `README.md` covering prerequisites, first run, the seeded administrator, and the plain statement that `SEED_ADMIN_PASSWORD` must be changed before this is exposed to anyone
+- [x] 3.5 Run `openspec validate add-notetaking-platform --type change --strict` and resolve any finding before archive
+- [x] 3.6 Check the code zone against the design: no `rehype-raw` anywhere in the dependency tree, the partial unique indexes present in the applied migration, and no read path missing its `deletedAt` filter
+- [x] 3.7 Write the root `README.md` covering prerequisites, first run, the seeded administrator, and the plain statement that `SEED_ADMIN_PASSWORD` must be changed before this is exposed to anyone
