@@ -1,4 +1,5 @@
 schema: intent-driven
+stack: javascript
 
 #   context: |
 #     Tech stack: TypeScript, React, Node.js
@@ -12,13 +13,13 @@ rules:
   proposal:
     - Must use grill-me skill
     # - Must use adversaril-authoring skill
-    # - Must use glossary skill
+    - Must use glossary skill
   design:
     - Must use c4-diagrams skill
-    # - Must use glossary skill
+    - Must use glossary skill
   adr:
     - Must use architectural-decision-records skill
   specs:
-    # - Must use spec-as-source skill
+    - Must use spec-as-source skill
   tasks:
-    # - Must use spec-as-source skill
+    - Must use spec-as-source skill

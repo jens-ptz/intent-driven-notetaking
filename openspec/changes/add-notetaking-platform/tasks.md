@@ -8,7 +8,7 @@ separately from code-zone work. `tasks.md` itself is exempt and may be ticked fr
 
 ## 1. First-time setup — skip this whole section if `acceptance-tests/` already exists
 
-- [ ] 1.1 Add `stack: javascript` to `openspec/config.yaml`. This is a specs-zone edit: commit it on its own, before any scaffolding
+- [x] 1.1 Add `stack: javascript` to `openspec/config.yaml`. This is a specs-zone edit: commit it on its own, before any scaffolding
 - [ ] 1.2 Create the pnpm workspace: root `package.json`, `pnpm-workspace.yaml` covering `apps/*` and `packages/*`, shared TypeScript config, and `.gitignore`
 - [ ] 1.3 Add `docker-compose.yml` running PostgreSQL 16 on a named volume, with `.env.example` documenting `DATABASE_URL` and `SEED_ADMIN_PASSWORD`
 - [ ] 1.4 Scaffold `apps/api` as a NestJS application that boots, exposes the health check from `platform-foundation`, and reads its configuration from the environment
