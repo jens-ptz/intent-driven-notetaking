@@ -33,12 +33,12 @@ separately from code-zone work. `tasks.md` itself is exempt and may be ticked fr
 - [x] 2.1.3 platform-foundation: `an administrator account named "X" exists` / `exactly one account named "X" exists` — red → green → commit
 - [x] 2.1.4 platform-foundation: `that account holds the admin role` — red → green → commit
 - [x] 2.1.5 platform-foundation: `Hans signs in as "X" with the password "Y"` and `he is signed in as an administrator` — red → green → commit
-- [ ] 2.1.6 platform-foundation: `<person> owns a note titled "X"` — the shared note-fixture step used across most capabilities — red → green → commit
-- [ ] 2.1.7 platform-foundation: `<person> is signed in` — the shared session-fixture step — red → green → commit
+- [x] 2.1.6 platform-foundation: `<person> owns a note titled "X"` — the shared note-fixture step used across most capabilities — red → green → commit
+- [x] 2.1.7 platform-foundation: `<person> is signed in` — the shared session-fixture step — red → green → commit
 - [ ] 2.1.8 platform-foundation: `<person> deletes that note` and `the note is absent from her note list` — red → green → commit
 - [ ] 2.1.9 platform-foundation: `reading that note reports it does not exist` — red → green → commit
 - [ ] 2.1.10 platform-foundation: `<person> has deleted her note titled "X"`, `Hans lists all notes as an administrator`, `the note titled "X" is absent from the results` — red → green → commit
-- [ ] 2.1.11 platform-foundation: `<person> creates a note titled "X"` and `the identifier of "X" is greater than the identifier of "Y"` — red → green → commit
+- [x] 2.1.11 platform-foundation: `<person> creates a note titled "X"` and `the identifier of "X" is greater than the identifier of "Y"` — red → green → commit
 - [ ] 2.1.12 platform-foundation: `the API is running against an initialized database`, `the health of the platform is checked`, `the platform reports itself healthy` — red → green → commit
 - [ ] 2.1.13 platform-foundation: `the API is running and the database is unreachable` and `the platform reports itself unhealthy` — red → green → commit
 
@@ -73,15 +73,15 @@ separately from code-zone work. `tasks.md` itself is exempt and may be ticked fr
 
 ### 2.4 note-management
 
-- [ ] 2.4.1 note-management: `<person> creates a note titled "X" with the text "Y"`, `the note appears in her note list`, `the note is private`, `<person> is its owner` — red → green → commit
-- [ ] 2.4.2 note-management: `<person> tries to create a note with an empty title` and `creation is refused because the title is required` — red → green → commit
-- [ ] 2.4.3 note-management: `<person> lists her notes`, `she sees "X"`, `she does not see "Y"` — the ownership boundary on listing — red → green → commit
-- [ ] 2.4.4 note-management: `<person> owns a private note titled "X"`, `<person> tries to read that note`, `she is told the note does not exist` — not-found rather than forbidden — red → green → commit
-- [ ] 2.4.5 note-management: `<person> changes its text to "X"` and `reading the note shows the text "X"` — red → green → commit
-- [ ] 2.4.6 note-management: `<person> tries to change that note's text`, `the change is refused`, `reading it as <person> shows the original text` — red → green → commit
-- [ ] 2.4.7 note-management: `<person> deletes it` and `it is absent from her note list` — red → green → commit
+- [x] 2.4.1 note-management: `<person> creates a note titled "X" with the text "Y"`, `the note appears in her note list`, `the note is private`, `<person> is its owner` — red → green → commit
+- [x] 2.4.2 note-management: `<person> tries to create a note with an empty title` and `creation is refused because the title is required` — red → green → commit
+- [x] 2.4.3 note-management: `<person> lists her notes`, `she sees "X"`, `she does not see "Y"` — the ownership boundary on listing — red → green → commit
+- [x] 2.4.4 note-management: `<person> owns a private note titled "X"`, `<person> tries to read that note`, `she is told the note does not exist` — not-found rather than forbidden — red → green → commit
+- [x] 2.4.5 note-management: `<person> changes its text to "X"` and `reading the note shows the text "X"` — red → green → commit
+- [x] 2.4.6 note-management: `<person> tries to change that note's text`, `the change is refused`, `reading it as <person> shows the original text` — red → green → commit
+- [x] 2.4.7 note-management: `<person> deletes it` and `it is absent from her note list` — red → green → commit
 - [ ] 2.4.8 note-management: deleting a published note removes it from the public feed — red → green → commit
-- [ ] 2.4.9 note-management: `<person> tries to delete that note`, `the deletion is refused`, `the note is still in <person>'s note list` — red → green → commit
+- [x] 2.4.9 note-management: `<person> tries to delete that note`, `the deletion is refused`, `the note is still in <person>'s note list` — red → green → commit
 
 ### 2.5 note-tagging
 

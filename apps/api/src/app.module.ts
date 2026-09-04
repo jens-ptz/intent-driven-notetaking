@@ -5,6 +5,7 @@ import { AuthGuard } from './auth/auth.guard';
 import { AuthModule } from './auth/auth.module';
 import { OriginGuard } from './common/origin.guard';
 import { HealthModule } from './health/health.module';
+import { NotesModule } from './notes/notes.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { UsersModule } from './users/users.module';
 
@@ -14,6 +15,7 @@ import { UsersModule } from './users/users.module';
     PrismaModule,
     AuthModule,
     UsersModule,
+    NotesModule,
     HealthModule,
   ],
   providers: [
