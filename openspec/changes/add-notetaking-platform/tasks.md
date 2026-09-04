@@ -131,6 +131,8 @@ separately from code-zone work. `tasks.md` itself is exempt and may be ticked fr
 - [x] 2.7.11 platform-administration: `Hans tries to delete his own account as an administrator` and `the attempt is refused` — red → green → commit
 - [x] 2.7.12 platform-administration: `<person> tries to list all notes as an administrator` / `open the moderation queue` / `ban <person>'s account`, and `every attempt is refused as forbidden` — red → green → commit
 - [x] 2.7.13 platform-administration: `the moderation queue is requested` unauthenticated and `the request is refused as unauthenticated` — red → green → commit
+- [ ] 2.7.14 platform-administration: `Hans changes its title` on a published note returns it to pending and drops it from the feed — the admin path follows note-publication's re-moderation rule — red → green → commit
+- [ ] 2.7.15 platform-administration: `Hans replaces its tags with "X" as an administrator` and `the note carries only the tag "X"` — red → green → commit
 
 ### 2.8 web-client — Playwright-backed page objects, `web` profile
 
@@ -151,6 +153,7 @@ separately from code-zone work. `tasks.md` itself is exempt and may be ticked fr
 - [x] 2.8.15 web-client: `Hans bans <person> from the account list` and `<person> is shown as banned in the account list` — red → green → commit
 - [x] 2.8.16 web-client: `<person> navigates to the administration area`, `she is refused access`, `no administration navigation is offered to her` — red → green → commit
 - [x] 2.8.17 web-client: add the editor's warning that saving a published note sends it back for approval, as the design's mitigation for ADR-0005 — red → green → commit
+- [ ] 2.8.18 web-client: `Hans opens the administration area` and `he is offered the moderation queue, the account list and all notes` — an admin sub-navigation — red → green → commit
 
 ## 3. Completion
 

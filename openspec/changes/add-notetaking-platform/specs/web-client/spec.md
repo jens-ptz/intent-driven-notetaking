@@ -160,3 +160,11 @@ When Priya navigates to the administration area
 Then she is refused access
 And no administration navigation is offered to her
 ```
+
+#### Scenario: The administration area offers every administrator screen
+
+```gherkin
+Given Hans is signed in as an administrator
+When Hans opens the administration area
+Then he is offered the moderation queue, the account list and all notes
+```

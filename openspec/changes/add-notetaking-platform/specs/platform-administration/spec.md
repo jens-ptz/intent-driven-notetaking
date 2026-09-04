@@ -7,8 +7,10 @@ worklist, and **Ban** / unban / delete over every **Account**.
 
 ### Requirement: An Administrator reaches every Note
 An **Administrator** SHALL list, read, update and delete any **Note** regardless of its **Owner** or
-**Publication State**, excluding soft-deleted ones. Deleting a **Note** as an **Administrator** MUST
-apply a **Soft Delete**, exactly as an **Owner**'s delete does.
+**Publication State**, excluding soft-deleted ones. An **Administrator**'s update MUST follow the same
+rules as an **Owner**'s: supplying **Tags** replaces the whole set, and changing the content of a
+published **Note** returns it to pending exactly as `note-publication` requires. Deleting a **Note** as
+an **Administrator** MUST apply a **Soft Delete**, exactly as an **Owner**'s delete does.
 
 #### Scenario: An administrator lists notes across owners
 
@@ -42,6 +44,23 @@ Given Priya owns a note titled "Rust notes"
 When Hans deletes that note as an administrator
 Then it is absent from Priya's note list
 And reading it reports it does not exist
+```
+
+#### Scenario: An administrator's edit of a published note returns it to moderation
+
+```gherkin
+Given Priya owns a published note titled "Rust notes"
+When Hans changes its title to "Rust notes (reviewed)"
+Then the note is pending publication
+And "Rust notes (reviewed)" is absent from the public feed
+```
+
+#### Scenario: An administrator replaces a note's tags
+
+```gherkin
+Given Priya owns a note tagged "draft"
+When Hans replaces its tags with "reviewed" as an administrator
+Then the note carries only the tag "reviewed"
 ```
 
 ### Requirement: The Moderation Queue lists work awaiting a decision
