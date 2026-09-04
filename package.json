@@ -9,15 +9,16 @@
     "db:up": "docker compose up -d db",
     "db:down": "docker compose down",
     "db:reset": "docker compose down -v && docker compose up -d db",
-    "migrate": "pnpm --filter @notes/api exec prisma migrate deploy",
-    "seed": "pnpm --filter @notes/api run seed",
-    "dev": "pnpm --parallel --filter @notes/api --filter @notes/web run dev",
+    "migrate": "dotenv -e .env -- pnpm --filter @notes/api exec prisma migrate deploy",
+    "seed": "dotenv -e .env -- pnpm --filter @notes/api run seed",
+    "dev": "dotenv -e .env -- pnpm --parallel --filter @notes/api --filter @notes/web run dev",
     "build": "pnpm --filter @notes/shared run build && pnpm --recursive run build",
     "typecheck": "pnpm --recursive run typecheck",
     "test:acceptance": "pnpm --filter @notes/acceptance-tests run test",
     "lint:specs": "pnpm --filter @notes/acceptance-tests run lint:specs"
   },
   "devDependencies": {
-    "typescript": "5.7.3"
+    "typescript": "5.7.3",
+    "dotenv-cli": "^8.0.0"
   }
 }

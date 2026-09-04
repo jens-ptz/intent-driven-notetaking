@@ -157,7 +157,7 @@ separately from code-zone work. `tasks.md` itself is exempt and may be ticked fr
 - [x] 3.1 Run `npm run lint:specs` in `acceptance-tests/` and resolve every gherkin-lint finding
 - [x] 3.2 Run the full suite: every scenario passes, zero pending and zero undefined steps, HTML report generated under `acceptance-tests/reports/`
 - [x] 3.3 Verify the profiles in isolation: the browser-only profile and the API-only profile each run and pass on their own
-- [ ] 3.4 Confirm `docker compose down -v` followed by compose up, migrate, seed and the suite reproduces a green run from nothing
+- [x] 3.4 Confirm `docker compose down -v` followed by compose up, migrate, seed and the suite reproduces a green run from nothing
 - [x] 3.5 Run `openspec validate add-notetaking-platform --type change --strict` and resolve any finding before archive
 - [x] 3.6 Check the code zone against the design: no `rehype-raw` anywhere in the dependency tree, the partial unique indexes present in the applied migration, and no read path missing its `deletedAt` filter
 - [x] 3.7 Write the root `README.md` covering prerequisites, first run, the seeded administrator, and the plain statement that `SEED_ADMIN_PASSWORD` must be changed before this is exposed to anyone

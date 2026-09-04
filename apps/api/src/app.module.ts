@@ -13,7 +13,10 @@ import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true }),
+    // The repository's .env sits at the root, two levels up from this app.
+    // Root scripts hand it down via dotenv-cli; this fallback covers running
+    // nest directly from apps/api.
+    ConfigModule.forRoot({ isGlobal: true, envFilePath: ['.env', '../../.env'] }),
     PrismaModule,
     AuthModule,
     UsersModule,
