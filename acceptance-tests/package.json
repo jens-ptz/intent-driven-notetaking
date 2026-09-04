@@ -1,0 +1,22 @@
+{
+  "name": "@notes/acceptance-tests",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Executes the Gherkin extracted from every spec.md (ADR-0007).",
+  "scripts": {
+    "test": "cucumber-js",
+    "test:specs": "cucumber-js -p specs",
+    "test:api": "cucumber-js -p api",
+    "test:web": "cucumber-js -p web",
+    "lint:specs": "node extract-gherkin.cjs && gherkin-lint .extracted"
+  },
+  "devDependencies": {
+    "@cucumber/cucumber": "^11.1.1",
+    "@playwright/test": "^1.49.1",
+    "cheerio": "^1.0.0",
+    "gherkin-lint": "^4.2.4",
+    "glob": "^11.0.0",
+    "pg": "^8.13.1"
+  }
+}

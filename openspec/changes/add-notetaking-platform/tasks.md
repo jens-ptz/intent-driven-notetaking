@@ -15,14 +15,14 @@ separately from code-zone work. `tasks.md` itself is exempt and may be ticked fr
 - [x] 1.5 Add the initial Prisma schema (`User`, `Note`, `Tag`, the note–tag relation, `Role` and `PublicationState` enums, `deletedAt` on `User` and `Note`, `bannedAt` on `User`) plus the first migration; add the raw-SQL partial unique indexes on `users(email)` and `users(user_name)` scoped to `deleted_at IS NULL` per ADR-0004
 - [x] 1.6 Add the idempotent Prisma seed inserting the `hans.admin` administrator, taking the password from `SEED_ADMIN_PASSWORD` and defaulting to `p@assw0rt`
 - [x] 1.7 Scaffold `apps/web` as a React + Vite + TypeScript SPA that boots and proxies `/api` to the API in development, and `packages/shared` for the DTO types
-- [ ] 1.8 Create `acceptance-tests/` at the repo root as an independent JavaScript project whose hooks start the database, run migrations and the seed, boot the API and boot Vite before the suite, and shut them all down after
-- [ ] 1.9 Copy the acceptance-test-authoring JavaScript reference files verbatim into `acceptance-tests/` — `extract-gherkin.cjs`, `cucumber.cjs`, `openspec-effective-paths.cjs`, and `.gherkin-lintrc` from the shared references root. Destination filenames are load-bearing. Verify the runner extracts Gherkin from every `spec.md` under `openspec/` into `.extracted/` and excludes `openspec/changes/archive/`
-- [ ] 1.10 Add the HTTP world and cheerio-free JSON page objects for API scenarios, and a per-scenario hook that truncates every table and re-runs the seed so scenarios are order-independent
-- [ ] 1.11 Add the Playwright fixture and a `web` cucumber profile selecting `.extracted/**/web-client/**` by path, plus a complementary profile excluding it, per ADR-0007. Selection is by profile path, not by tag — the `spec.md` fences hold only Given/When/Then steps
-- [ ] 1.12 Make the single test command always write an HTML report under `acceptance-tests/reports/`
-- [ ] 1.13 Add the spec-lint command (`node extract-gherkin.cjs && gherkin-lint .extracted`) and gitignore `acceptance-tests/.extracted/` and `acceptance-tests/reports/`
-- [ ] 1.14 Write `acceptance-tests/README.md` covering how to run the suite, how to run API-only and browser-only profiles, and where the HTML report lands
-- [ ] 1.15 Confirm the baseline: `npx cucumber-js --dry-run` resolves only `.extracted/` paths, nothing under `changes/archive/`, and every scenario reports as undefined rather than erroring
+- [x] 1.8 Create `acceptance-tests/` at the repo root as an independent JavaScript project whose hooks start the database, run migrations and the seed, boot the API and boot Vite before the suite, and shut them all down after
+- [x] 1.9 Copy the acceptance-test-authoring JavaScript reference files verbatim into `acceptance-tests/` — `extract-gherkin.cjs`, `cucumber.cjs`, `openspec-effective-paths.cjs`, and `.gherkin-lintrc` from the shared references root. Destination filenames are load-bearing. Verify the runner extracts Gherkin from every `spec.md` under `openspec/` into `.extracted/` and excludes `openspec/changes/archive/`
+- [x] 1.10 Add the HTTP world and cheerio-free JSON page objects for API scenarios, and a per-scenario hook that truncates every table and re-runs the seed so scenarios are order-independent
+- [x] 1.11 Add the Playwright fixture and a `web` cucumber profile selecting `.extracted/**/web-client/**` by path, plus a complementary profile excluding it, per ADR-0007. Selection is by profile path, not by tag — the `spec.md` fences hold only Given/When/Then steps
+- [x] 1.12 Make the single test command always write an HTML report under `acceptance-tests/reports/`
+- [x] 1.13 Add the spec-lint command (`node extract-gherkin.cjs && gherkin-lint .extracted`) and gitignore `acceptance-tests/.extracted/` and `acceptance-tests/reports/`
+- [x] 1.14 Write `acceptance-tests/README.md` covering how to run the suite, how to run API-only and browser-only profiles, and where the HTML report lands
+- [x] 1.15 Confirm the baseline: `npx cucumber-js --dry-run` resolves only `.extracted/` paths, nothing under `changes/archive/`, and every scenario reports as undefined rather than erroring
 
 ## 2. Step definitions — each one: red → green → commit
 

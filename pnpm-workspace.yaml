@@ -1,3 +1,7 @@
 packages:
   - 'apps/*'
   - 'packages/*'
+  # The acceptance suite keeps its own package.json, scripts and application
+  # lifecycle, and treats the app as a black box it boots over HTTP and a
+  # browser. It is a workspace member only so one install covers the repository.
+  - 'acceptance-tests'
