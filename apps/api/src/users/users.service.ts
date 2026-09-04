@@ -65,8 +65,15 @@ export class UsersService {
         });
       }
     }
-    // roles is not in UpdateProfileDto, so no profile update can change it.
-    return UsersService.toProfile(await this.users.update(id, dto));
+    // Built field by field: the DTO's `roles` exists only to be refused by
+    // validation and must never reach the database layer.
+    return UsersService.toProfile(
+      await this.users.update(id, {
+        ...(dto.firstName === undefined ? {} : { firstName: dto.firstName }),
+        ...(dto.lastName === undefined ? {} : { lastName: dto.lastName }),
+        ...(dto.userName === undefined ? {} : { userName: dto.userName }),
+      }),
+    );
   }
 
   async deleteOwnAccount(id: number): Promise<void> {

@@ -14,6 +14,11 @@ export class UsersController {
     private readonly users: UsersRepository,
   ) {}
 
+  /**
+   * A `roles` field here is stripped and the account is created holding USER
+   * only. The DTO has no roles field and the service hard-codes the role, so
+   * there is nothing to smuggle past.
+   */
   @Public()
   @Post('register')
   register(@Body() dto: RegisterDto): Promise<UserProfile> {

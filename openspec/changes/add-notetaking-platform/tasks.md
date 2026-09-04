@@ -44,19 +44,19 @@ separately from code-zone work. `tasks.md` itself is exempt and may be ticked fr
 
 ### 2.2 user-accounts
 
-- [ ] 2.2.1 user-accounts: `no account uses the email "X"` and `a live account uses the email "X"` / `the user name "X"` — red → green → commit
-- [ ] 2.2.2 user-accounts: `<person> registers as "X" with the email "Y"` and `her account exists` — red → green → commit
-- [ ] 2.2.3 user-accounts: `she holds the user role only` / `his account holds the user role only` — red → green → commit
-- [ ] 2.2.4 user-accounts: `<person> tries to register with the email "X"` and `registration is refused because the email is taken` — red → green → commit
-- [ ] 2.2.5 user-accounts: `<person> tries to register as "X"` and `registration is refused because the user name is taken` — red → green → commit
-- [ ] 2.2.6 user-accounts: `<person> tries to register with the email "X" and the password "Y"`, `registration is refused because the details are invalid`, `no account is created for her` — red → green → commit
-- [ ] 2.2.7 user-accounts: `<person> registers with the email "X" and asks for the admin role` — the privilege-escalation guard — red → green → commit
-- [ ] 2.2.8 user-accounts: `<person> views her profile`, `she sees her first name, last name, email and user name`, `no password material is shown` — red → green → commit
-- [ ] 2.2.9 user-accounts: `<person> changes her last name to "X"` and `her profile shows the last name "X"` — red → green → commit
-- [ ] 2.2.10 user-accounts: `<person> is signed in and holds the user role only`, `<person> tries to give herself the admin role`, `the change is refused`, `she still holds the user role only` — red → green → commit
-- [ ] 2.2.11 user-accounts: `<person> deletes her account` and `she can no longer sign in with her former credentials` — red → green → commit
-- [ ] 2.2.12 user-accounts: `<person> owns a published note titled "X"` and `"X" is absent from the public feed` — the account-deletion cascade — red → green → commit
-- [ ] 2.2.13 user-accounts: `<person> has deleted her account which used the email "X"`, `<person> registers with the email "X"`, `his account is created`, `his note list is empty` — identity reuse, which also proves the partial indexes of ADR-0004 survived — red → green → commit
+- [x] 2.2.1 user-accounts: `no account uses the email "X"` and `a live account uses the email "X"` / `the user name "X"` — red → green → commit
+- [x] 2.2.2 user-accounts: `<person> registers as "X" with the email "Y"` and `her account exists` — red → green → commit
+- [x] 2.2.3 user-accounts: `she holds the user role only` / `his account holds the user role only` — red → green → commit
+- [x] 2.2.4 user-accounts: `<person> tries to register with the email "X"` and `registration is refused because the email is taken` — red → green → commit
+- [x] 2.2.5 user-accounts: `<person> tries to register as "X"` and `registration is refused because the user name is taken` — red → green → commit
+- [x] 2.2.6 user-accounts: `<person> tries to register with the email "X" and the password "Y"`, `registration is refused because the details are invalid`, `no account is created for her` — red → green → commit
+- [x] 2.2.7 user-accounts: `<person> registers with the email "X" and asks for the admin role` — the privilege-escalation guard — red → green → commit
+- [x] 2.2.8 user-accounts: `<person> views her profile`, `she sees her first name, last name, email and user name`, `no password material is shown` — red → green → commit
+- [x] 2.2.9 user-accounts: `<person> changes her last name to "X"` and `her profile shows the last name "X"` — red → green → commit
+- [x] 2.2.10 user-accounts: `<person> is signed in and holds the user role only`, `<person> tries to give herself the admin role`, `the change is refused`, `she still holds the user role only` — red → green → commit
+- [x] 2.2.11 user-accounts: `<person> deletes her account` and `she can no longer sign in with her former credentials` — red → green → commit
+- [x] 2.2.12 user-accounts: `<person> owns a published note titled "X"` and `"X" is absent from the public feed` — the account-deletion cascade — red → green → commit
+- [x] 2.2.13 user-accounts: `<person> has deleted her account which used the email "X"`, `<person> registers with the email "X"`, `his account is created`, `his note list is empty` — identity reuse, which also proves the partial indexes of ADR-0004 survived — red → green → commit
 
 ### 2.3 authentication
 

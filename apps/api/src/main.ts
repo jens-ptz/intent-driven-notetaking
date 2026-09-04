@@ -16,15 +16,14 @@ async function bootstrap(): Promise<void> {
   // the origin is pinned rather than reflected (ADR-0002).
   app.enableCors({ origin: config.webOrigin, credentials: true });
 
-  app.useGlobalPipes(
-    new ValidationPipe({
-      whitelist: true,
-      // Unknown properties are rejected outright, so a registration request
-      // cannot smuggle a `roles` field past the DTO (user-accounts).
-      forbidNonWhitelisted: true,
-      transform: true,
-    }),
-  );
+  // Unknown properties are stripped, not rejected. Registration is public and
+  // has many clients, so an extra field is noise. What stops a new account
+  // granting itself ADMIN is that RegisterDto has no `roles` field and the
+  // service hard-codes the role.
+  //
+  // Routes where an unknown property means a deliberate escalation attempt -
+  // updating your own profile - opt into StrictBody and refuse it loudly.
+  app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
 
   await app.listen(config.port);
 }

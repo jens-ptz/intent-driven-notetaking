@@ -129,9 +129,10 @@ Then('reading the note shows the text {string}', async function (text) {
 });
 
 Then('the change is refused', function () {
+  // 400 for a rejected escalation attempt, 403/404 for someone else's note.
   assert.ok(
-    [403, 404].includes(this.lastResponse.status),
-    `expected the change to be refused, got ${this.lastResponse.status}`,
+    [400, 403, 404].includes(this.lastResponse.status),
+    `expected the change to be refused, got ${this.lastResponse.status}: ${JSON.stringify(this.lastBody)}`,
   );
 });
 

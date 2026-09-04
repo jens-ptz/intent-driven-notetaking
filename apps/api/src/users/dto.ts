@@ -1,4 +1,4 @@
-import { IsEmail, IsOptional, IsString, Matches, MaxLength, MinLength } from 'class-validator';
+import { IsEmail, IsEmpty, IsOptional, IsString, Matches, MaxLength, MinLength } from 'class-validator';
 import { PASSWORD_MIN_LENGTH } from '@notes/shared';
 
 /**
@@ -34,6 +34,17 @@ export class RegisterDto {
 }
 
 export class UpdateProfileDto {
+  /**
+   * Declared only so it can be refused.
+   *
+   * The global pipe strips undeclared properties, which would turn an attempt
+   * to set `roles` into a silent no-op. Declaring it with @IsEmpty keeps it
+   * through whitelisting and then fails validation, so the escalation attempt
+   * is answered with 400 rather than ignored.
+   */
+  @IsEmpty({ message: 'roles cannot be changed through a profile update' })
+  roles?: never;
+
   @IsOptional()
   @IsString()
   @MinLength(1)
