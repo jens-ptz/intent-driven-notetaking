@@ -163,3 +163,11 @@ Then('every attempt is refused as forbidden', function () {
 When('the moderation queue is requested', async function () {
   await this.anonymous('GET', '/admin/moderation');
 });
+
+When('{word} replaces its tags with {string} as an administrator', async function (person, tag) {
+  await ensureSignedIn(this, person);
+  const note = this.taggedNotes[0];
+  const { response, body } = await this.patch(person, `/admin/notes/${note.id}`, { tags: [tag] });
+  assert.equal(response.status, 200, JSON.stringify(body));
+  this.taggedNotes = [body];
+});

@@ -71,11 +71,6 @@ export class AdminService {
     await this.users.softDeleteWithNotes(targetId);
   }
 
-  async updateNote(id: number, data: { title?: string; text?: string }): Promise<NoteView> {
-    await this.requireLiveNote(id);
-    return toNoteView(await this.notes.update(id, data));
-  }
-
   async deleteNote(id: number): Promise<void> {
     await this.requireLiveNote(id);
     await this.notes.softDelete(id);

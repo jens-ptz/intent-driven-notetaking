@@ -66,10 +66,20 @@ export class NotesService {
    *
    * Without this an owner could publish acceptable content and then replace the
    * body, so the approval would not apply to what is actually public (ADR-0005).
-   * Only content changes trigger it.
+   * Only content changes trigger it. The rule is unconditional in the spec, so
+   * it applies to an administrator's edit too - the administrator can approve
+   * the result straight from the queue.
    */
   async update(id: number, ownerId: number, dto: UpdateNoteDto): Promise<NoteView> {
-    const existing = await this.requireOwned(id, ownerId);
+    return this.applyUpdate(await this.requireOwned(id, ownerId), dto);
+  }
+
+  /** The administrator's update: any live note, same rules as the owner's. */
+  async updateAny(id: number, dto: UpdateNoteDto): Promise<NoteView> {
+    return this.applyUpdate(await this.requireAny(id), dto);
+  }
+
+  private async applyUpdate(existing: NoteWithRelations, dto: UpdateNoteDto): Promise<NoteView> {
     const tagIds = await this.resolveTags(dto.tags);
 
     const contentChanged =
@@ -82,7 +92,7 @@ export class NotesService {
 
     return toNoteView(
       await this.notes.update(
-        id,
+        existing.id,
         {
           ...(dto.title === undefined ? {} : { title: dto.title }),
           ...(dto.text === undefined ? {} : { text: dto.text }),

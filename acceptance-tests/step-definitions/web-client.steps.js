@@ -287,3 +287,19 @@ Then('no administration navigation is offered to her', async function () {
   const { admin } = await browserPages(this);
   assert.equal(await admin.navigation().isVisible(), false);
 });
+
+When('{word} opens the administration area', async function (person) {
+  await signInBrowser(this, person);
+  const { admin } = await browserPages(this);
+  await admin.openModeration();
+});
+
+Then(
+  'he is offered the moderation queue, the account list and all notes',
+  async function () {
+    for (const id of ['nav-admin-moderation', 'nav-admin-users', 'nav-admin-notes']) {
+      await this.page.getByTestId(id).waitFor();
+      assert.ok(await this.page.getByTestId(id).isVisible(), `${id} is not offered`);
+    }
+  },
+);

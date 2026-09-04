@@ -25,6 +25,7 @@ import { RequireRoles } from '../auth/roles.decorator';
 import { RolesGuard } from '../auth/roles.guard';
 import { CurrentUser } from '../common/current-user.decorator';
 import { UpdateNoteDto } from '../notes/dto';
+import { NotesService } from '../notes/notes.service';
 import { RejectNoteDto } from '../publication/dto';
 import { PublicationService } from '../publication/publication.service';
 import { AdminService } from './admin.service';
@@ -40,6 +41,7 @@ import { AdminListQuery } from './dto';
 export class AdminController {
   constructor(
     private readonly admin: AdminService,
+    private readonly notes: NotesService,
     private readonly publication: PublicationService,
   ) {}
 
@@ -65,7 +67,9 @@ export class AdminController {
     @Param('id', ParseIntPipe) id: number,
     @Body() dto: UpdateNoteDto,
   ): Promise<NoteView> {
-    return this.admin.updateNote(id, { title: dto.title, text: dto.text });
+    // Same rules as the owner's update: tags replace the set, and editing a
+    // published note returns it to moderation (platform-administration).
+    return this.notes.updateAny(id, dto);
   }
 
   @Delete('notes/:id')

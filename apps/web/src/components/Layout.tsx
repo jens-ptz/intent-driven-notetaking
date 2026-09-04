@@ -27,12 +27,22 @@ export function Layout({ children }: { children: ReactNode }): JSX.Element {
                 My notes
               </Link>
               {isAdmin ? (
-                <>
+                // Every administrator screen is one click away; the area is not
+                // reachable by typed URL alone (web-client).
+                <span data-testid="nav-admin">
                   {' · '}
-                  <Link to="/admin/moderation" data-testid="nav-admin">
-                    Administration
+                  <Link to="/admin/moderation" data-testid="nav-admin-moderation">
+                    Moderation
                   </Link>
-                </>
+                  {' · '}
+                  <Link to="/admin/users" data-testid="nav-admin-users">
+                    Accounts
+                  </Link>
+                  {' · '}
+                  <Link to="/admin/notes" data-testid="nav-admin-notes">
+                    All notes
+                  </Link>
+                </span>
               ) : null}
               {' · '}
               <button type="button" onClick={signOut} data-testid="sign-out">
