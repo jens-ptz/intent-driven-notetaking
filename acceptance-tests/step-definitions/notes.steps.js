@@ -192,10 +192,10 @@ Then('{string} is absent from the public feed', async function (title) {
 // --- ownership --------------------------------------------------------------
 
 Then('the note is private', async function () {
-  const person = this.lastActor ?? 'Priya';
+  await ensureSignedIn(this, ADMIN);
   const [title] = [...this.notes.keys()].slice(-1);
-  const { body } = await this.get(person, `/notes/${noteId(this, title)}`);
-  assert.equal(body.publicationState, 'PRIVATE');
+  const { body } = await this.get(ADMIN, `/admin/notes/${noteId(this, title)}`);
+  assert.equal(body.publicationState, 'PRIVATE', JSON.stringify(body));
 });
 
 Then('{word} is its owner', async function (person) {

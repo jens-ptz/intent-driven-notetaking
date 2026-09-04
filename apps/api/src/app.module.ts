@@ -1,11 +1,13 @@
 import { Module } from '@nestjs/common';
 import { APP_GUARD } from '@nestjs/core';
 import { ConfigModule } from '@nestjs/config';
+import { AdminModule } from './admin/admin.module';
 import { AuthGuard } from './auth/auth.guard';
 import { AuthModule } from './auth/auth.module';
 import { OriginGuard } from './common/origin.guard';
 import { HealthModule } from './health/health.module';
 import { NotesModule } from './notes/notes.module';
+import { PublicationModule } from './publication/publication.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { UsersModule } from './users/users.module';
 
@@ -16,6 +18,8 @@ import { UsersModule } from './users/users.module';
     AuthModule,
     UsersModule,
     NotesModule,
+    PublicationModule,
+    AdminModule,
     HealthModule,
   ],
   providers: [

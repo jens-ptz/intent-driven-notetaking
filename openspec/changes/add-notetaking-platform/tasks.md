@@ -80,7 +80,7 @@ separately from code-zone work. `tasks.md` itself is exempt and may be ticked fr
 - [x] 2.4.5 note-management: `<person> changes its text to "X"` and `reading the note shows the text "X"` — red → green → commit
 - [x] 2.4.6 note-management: `<person> tries to change that note's text`, `the change is refused`, `reading it as <person> shows the original text` — red → green → commit
 - [x] 2.4.7 note-management: `<person> deletes it` and `it is absent from her note list` — red → green → commit
-- [ ] 2.4.8 note-management: deleting a published note removes it from the public feed — red → green → commit
+- [x] 2.4.8 note-management: deleting a published note removes it from the public feed — red → green → commit
 - [x] 2.4.9 note-management: `<person> tries to delete that note`, `the deletion is refused`, `the note is still in <person>'s note list` — red → green → commit
 
 ### 2.5 note-tagging
@@ -93,28 +93,28 @@ separately from code-zone work. `tasks.md` itself is exempt and may be ticked fr
 - [x] 2.5.6 note-tagging: `<person> owns a note tagged "X" and "Y"`, `<person> updates the note with the single tag "X"`, `the note carries only the tag "X"` — whole-set replacement — red → green → commit
 - [x] 2.5.7 note-tagging: `"X" is the only tag on <person>'s note`, `<person> removes "X" from that note`, `<person>'s note references the same tag that <person> used` — orphan retention — red → green → commit
 - [x] 2.5.8 note-tagging: `<person> lists her notes filtered by the tag "X"` and `she sees only the note tagged "X"` — red → green → commit
-- [ ] 2.5.9 note-tagging: `a visitor browses the public feed filtered by the tag "X"` and `only the note tagged "X" is listed` — red → green → commit
+- [x] 2.5.9 note-tagging: `a visitor browses the public feed filtered by the tag "X"` and `only the note tagged "X" is listed` — red → green → commit
 - [x] 2.5.10 note-tagging: filtering by an unknown tag yields `she sees no notes` — red → green → commit
 
 ### 2.6 note-publication
 
-- [ ] 2.6.1 note-publication: `<person> requests publication of that note` and `the note is pending publication` — red → green → commit
-- [ ] 2.6.2 note-publication: `<person>'s note "X" is pending publication`, `a visitor browses the public feed`, `"X" is not listed` — red → green → commit
-- [ ] 2.6.3 note-publication: `<person> tries to request publication of that note`, `the request is refused`, `the note is still private` — red → green → commit
-- [ ] 2.6.4 note-publication: `<person> requests publication of that note again` and `the request is refused as redundant` — red → green → commit
-- [ ] 2.6.5 note-publication: `Hans approves that note`, `the note is published`, `"X" is listed on the public feed` — red → green → commit
-- [ ] 2.6.6 note-publication: `Hans rejects that note with the reason "X"`, `the note is private again`, `<person> can read the rejection reason "X"` — red → green → commit
-- [ ] 2.6.7 note-publication: `<person> tries to approve that note`, `the attempt is refused`, `the note is still pending publication` — red → green → commit
-- [ ] 2.6.8 note-publication: editing a published note returns it to pending and drops it from the feed, per ADR-0005 — red → green → commit
-- [ ] 2.6.9 note-publication: `<person>'s published note "X" went back to pending after she edited it` and re-approval restores it to the feed — red → green → commit
-- [ ] 2.6.10 note-publication: `<person> withdraws it from publication`, `the note is private`, `it is still in <person>'s note list` — red → green → commit
-- [ ] 2.6.11 note-publication: `Hans withdraws that note from publication` — administrator withdrawal — red → green → commit
-- [ ] 2.6.12 note-publication: `a visitor with no account browses the public feed` and `"X" is listed` — red → green → commit
-- [ ] 2.6.13 note-publication: `a visitor with no account opens "X"` and `the visitor sees its title, text and tags` — red → green → commit
-- [ ] 2.6.14 note-publication: private notes never appear on the feed — red → green → commit
-- [ ] 2.6.15 note-publication: `Hans bans <person>'s account` hides her published notes from the feed — red → green → commit
-- [ ] 2.6.16 note-publication: `Hans unbans <person>'s account` restores them — red → green → commit
-- [ ] 2.6.17 note-publication: `a visitor with no account tries to open "X"` and `the visitor is told the note does not exist` — red → green → commit
+- [x] 2.6.1 note-publication: `<person> requests publication of that note` and `the note is pending publication` — red → green → commit
+- [x] 2.6.2 note-publication: `<person>'s note "X" is pending publication`, `a visitor browses the public feed`, `"X" is not listed` — red → green → commit
+- [x] 2.6.3 note-publication: `<person> tries to request publication of that note`, `the request is refused`, `the note is still private` — red → green → commit
+- [x] 2.6.4 note-publication: `<person> requests publication of that note again` and `the request is refused as redundant` — red → green → commit
+- [x] 2.6.5 note-publication: `Hans approves that note`, `the note is published`, `"X" is listed on the public feed` — red → green → commit
+- [x] 2.6.6 note-publication: `Hans rejects that note with the reason "X"`, `the note is private again`, `<person> can read the rejection reason "X"` — red → green → commit
+- [x] 2.6.7 note-publication: `<person> tries to approve that note`, `the attempt is refused`, `the note is still pending publication` — red → green → commit
+- [x] 2.6.8 note-publication: editing a published note returns it to pending and drops it from the feed, per ADR-0005 — red → green → commit
+- [x] 2.6.9 note-publication: `<person>'s published note "X" went back to pending after she edited it` and re-approval restores it to the feed — red → green → commit
+- [x] 2.6.10 note-publication: `<person> withdraws it from publication`, `the note is private`, `it is still in <person>'s note list` — red → green → commit
+- [x] 2.6.11 note-publication: `Hans withdraws that note from publication` — administrator withdrawal — red → green → commit
+- [x] 2.6.12 note-publication: `a visitor with no account browses the public feed` and `"X" is listed` — red → green → commit
+- [x] 2.6.13 note-publication: `a visitor with no account opens "X"` and `the visitor sees its title, text and tags` — red → green → commit
+- [x] 2.6.14 note-publication: private notes never appear on the feed — red → green → commit
+- [x] 2.6.15 note-publication: `Hans bans <person>'s account` hides her published notes from the feed — red → green → commit
+- [x] 2.6.16 note-publication: `Hans unbans <person>'s account` restores them — red → green → commit
+- [x] 2.6.17 note-publication: `a visitor with no account tries to open "X"` and `the visitor is told the note does not exist` — red → green → commit
 
 ### 2.7 platform-administration
 
