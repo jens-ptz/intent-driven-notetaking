@@ -9,12 +9,12 @@ separately from code-zone work. `tasks.md` itself is exempt and may be ticked fr
 ## 1. First-time setup — skip this whole section if `acceptance-tests/` already exists
 
 - [x] 1.1 Add `stack: javascript` to `openspec/config.yaml`. This is a specs-zone edit: commit it on its own, before any scaffolding
-- [ ] 1.2 Create the pnpm workspace: root `package.json`, `pnpm-workspace.yaml` covering `apps/*` and `packages/*`, shared TypeScript config, and `.gitignore`
-- [ ] 1.3 Add `docker-compose.yml` running PostgreSQL 16 on a named volume, with `.env.example` documenting `DATABASE_URL` and `SEED_ADMIN_PASSWORD`
-- [ ] 1.4 Scaffold `apps/api` as a NestJS application that boots, exposes the health check from `platform-foundation`, and reads its configuration from the environment
-- [ ] 1.5 Add the initial Prisma schema (`User`, `Note`, `Tag`, the note–tag relation, `Role` and `PublicationState` enums, `deletedAt` on `User` and `Note`, `bannedAt` on `User`) plus the first migration; add the raw-SQL partial unique indexes on `users(email)` and `users(user_name)` scoped to `deleted_at IS NULL` per ADR-0004
-- [ ] 1.6 Add the idempotent Prisma seed inserting the `hans.admin` administrator, taking the password from `SEED_ADMIN_PASSWORD` and defaulting to `p@assw0rt`
-- [ ] 1.7 Scaffold `apps/web` as a React + Vite + TypeScript SPA that boots and proxies `/api` to the API in development, and `packages/shared` for the DTO types
+- [x] 1.2 Create the pnpm workspace: root `package.json`, `pnpm-workspace.yaml` covering `apps/*` and `packages/*`, shared TypeScript config, and `.gitignore`
+- [x] 1.3 Add `docker-compose.yml` running PostgreSQL 16 on a named volume, with `.env.example` documenting `DATABASE_URL` and `SEED_ADMIN_PASSWORD`
+- [x] 1.4 Scaffold `apps/api` as a NestJS application that boots, exposes the health check from `platform-foundation`, and reads its configuration from the environment
+- [x] 1.5 Add the initial Prisma schema (`User`, `Note`, `Tag`, the note–tag relation, `Role` and `PublicationState` enums, `deletedAt` on `User` and `Note`, `bannedAt` on `User`) plus the first migration; add the raw-SQL partial unique indexes on `users(email)` and `users(user_name)` scoped to `deleted_at IS NULL` per ADR-0004
+- [x] 1.6 Add the idempotent Prisma seed inserting the `hans.admin` administrator, taking the password from `SEED_ADMIN_PASSWORD` and defaulting to `p@assw0rt`
+- [x] 1.7 Scaffold `apps/web` as a React + Vite + TypeScript SPA that boots and proxies `/api` to the API in development, and `packages/shared` for the DTO types
 - [ ] 1.8 Create `acceptance-tests/` at the repo root as an independent JavaScript project whose hooks start the database, run migrations and the seed, boot the API and boot Vite before the suite, and shut them all down after
 - [ ] 1.9 Copy the acceptance-test-authoring JavaScript reference files verbatim into `acceptance-tests/` — `extract-gherkin.cjs`, `cucumber.cjs`, `openspec-effective-paths.cjs`, and `.gherkin-lintrc` from the shared references root. Destination filenames are load-bearing. Verify the runner extracts Gherkin from every `spec.md` under `openspec/` into `.extracted/` and excludes `openspec/changes/archive/`
 - [ ] 1.10 Add the HTTP world and cheerio-free JSON page objects for API scenarios, and a per-scenario hook that truncates every table and re-runs the seed so scenarios are order-independent

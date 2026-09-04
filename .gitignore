@@ -49,3 +49,8 @@ tmp/
 temp/
 *.tmp
 *.log
+
+# --- notetaking platform ---------------------------------------------------
+apps/web/dist/
+acceptance-tests/.extracted/
+acceptance-tests/reports/

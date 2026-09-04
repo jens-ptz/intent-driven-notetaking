@@ -1,0 +1,93 @@
+// Prisma schema for the note-taking platform.
+//
+// Two invariants are not expressible here and live in migration SQL instead:
+//   * email and user_name are unique only among live rows (deleted_at IS NULL).
+//     See ADR-0004 and migrations/.../migration.sql.
+// Every read path filters deleted_at explicitly; there is no global soft-delete
+// extension on the client (ADR-0004).
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum PublicationState {
+  PRIVATE
+  PENDING
+  PUBLISHED
+}
+
+model User {
+  id           Int       @id @default(autoincrement())
+  firstName    String    @map("first_name")
+  lastName     String    @map("last_name")
+  email        String
+  userName     String    @map("user_name")
+  passwordHash String    @map("password_hash")
+  roles        Role[]    @default([USER])
+  bannedAt     DateTime? @map("banned_at")
+  deletedAt    DateTime? @map("deleted_at")
+  createdAt    DateTime  @default(now()) @map("created_at")
+  updatedAt    DateTime  @updatedAt @map("updated_at")
+
+  notes Note[]
+
+  @@index([deletedAt])
+  @@map("users")
+}
+
+model Note {
+  id               Int              @id @default(autoincrement())
+  title            String
+  text             String
+  publicationState PublicationState @default(PRIVATE) @map("publication_state")
+  rejectionReason  String?          @map("rejection_reason")
+  publishedAt      DateTime?        @map("published_at")
+  ownerId          Int              @map("owner_id")
+  deletedAt        DateTime?        @map("deleted_at")
+  createdAt        DateTime         @default(now()) @map("created_at")
+  updatedAt        DateTime         @updatedAt @map("updated_at")
+
+  owner User      @relation(fields: [ownerId], references: [id], onDelete: Restrict)
+  tags  NoteTag[]
+
+  @@index([ownerId, deletedAt])
+  @@index([publicationState, deletedAt])
+  @@map("notes")
+}
+
+// Tags are shared reference data. They are never soft-deleted and a tag left on
+// zero notes is retained, so no cleanup path can race a soft-deleted note that
+// still references it.
+model Tag {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  createdAt DateTime @default(now()) @map("created_at")
+
+  notes NoteTag[]
+
+  @@map("tags")
+}
+
+// Explicit join table rather than an implicit m2m, so the relation has a stable
+// name and can carry an index the feed query uses.
+model NoteTag {
+  noteId Int @map("note_id")
+  tagId  Int @map("tag_id")
+
+  note Note @relation(fields: [noteId], references: [id], onDelete: Cascade)
+  tag  Tag  @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([noteId, tagId])
+  @@index([tagId])
+  @@map("note_tags")
+}
