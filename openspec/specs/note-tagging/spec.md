@@ -1,12 +1,14 @@
 # note-tagging Specification
 
 ## Purpose
+
 How free-text tag input becomes a shared **Tag**, how **Tags** attach to and detach from **Notes**, and
 how note lists are filtered by tag.
 
 ## Requirements
 
 ### Requirement: Tag input is normalized before lookup
+
 Tag input SHALL be normalized by trimming surrounding whitespace, lowercasing, and collapsing each run
 of internal whitespace into a single hyphen. A normalized name MUST consist of 1 to 32 characters drawn
 from `a`-`z`, `0`-`9` and `-`; input that normalizes to anything else MUST be refused. Two inputs that
@@ -39,6 +41,7 @@ Then the note is refused because the tag is invalid
 ```
 
 ### Requirement: Tags are created on demand and shared between Notes
+
 Writing a **Note** SHALL attach the **Tag** matching each normalized name, creating the **Tag** when no
 such name exists yet. A **Note** MUST carry 0..n **Tags** and a **Tag** MUST be attachable to 0..n
 **Notes**. Attaching an existing name MUST reuse the existing **Tag** rather than create a duplicate.
@@ -60,6 +63,7 @@ Then both notes reference the same tag
 ```
 
 ### Requirement: Updating a Note replaces its whole Tag set
+
 Supplying tags when updating a **Note** SHALL replace that **Note**'s **Tags** with exactly the supplied
 set. **Tags** left attached to no **Note** MUST be retained rather than removed, and MUST be reusable by
 a later **Note** without changing identity.
@@ -82,6 +86,7 @@ Then Marek's note references the same tag that Priya used
 ```
 
 ### Requirement: Note lists can be filtered by Tag
+
 Both a **Registered User**'s own note list and the **Public Feed** SHALL accept a tag filter and return
 only the **Notes** carrying that **Tag**. Filtering by a tag name that no **Tag** matches MUST return an
 empty result rather than an error.

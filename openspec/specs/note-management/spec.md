@@ -1,12 +1,14 @@
 # note-management Specification
 
 ## Purpose
+
 What an **Owner** may do with their own **Notes**, and the ownership boundary that separates one
 **Registered User**'s notes from another's.
 
 ## Requirements
 
 ### Requirement: A Registered User creates Notes
+
 A signed-in **Registered User** SHALL create a **Note** with a title and body text. The creating
 **Registered User** MUST become its **Owner**, and ownership MUST NOT be transferable afterwards. A new
 **Note** MUST start in the private **Publication State**. Creation MUST be refused when the title is
@@ -31,6 +33,7 @@ Then creation is refused because the title is required
 ```
 
 ### Requirement: A Registered User lists and reads only their own Notes
+
 Listing **Notes** SHALL return only the **Notes** owned by the requesting **Registered User**, excluding
 soft-deleted ones. Reading a **Note** owned by someone else MUST be refused as if the **Note** did not
 exist, so that note identifiers cannot be probed to learn what other people have written.
@@ -54,6 +57,7 @@ Then she is told the note does not exist
 ```
 
 ### Requirement: An Owner updates their own Note
+
 An **Owner** SHALL change the title, body text and **Tags** of a **Note** they own. An update by anyone
 other than the **Owner** MUST be refused; an update by an **Administrator** is governed by
 `platform-administration`.
@@ -76,6 +80,7 @@ And reading it as Marek shows the original text
 ```
 
 ### Requirement: An Owner deletes their own Note
+
 An **Owner** SHALL delete a **Note** they own, which MUST apply a **Soft Delete**. A deleted **Note**
 MUST disappear from the **Owner**'s list, MUST be unreadable, and if it was published MUST leave the
 **Public Feed**. Deletion by anyone other than the **Owner** or an **Administrator** MUST be refused.

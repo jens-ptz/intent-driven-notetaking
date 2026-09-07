@@ -1,12 +1,14 @@
 # platform-foundation Specification
 
 ## Purpose
+
 The invariants every other capability depends on: the always-present **Seed Administrator**,
 **Soft Delete** as the only removal semantic, and autoincrement integer identifiers.
 
 ## Requirements
 
 ### Requirement: Seed Administrator always exists
+
 The platform SHALL guarantee that an **Administrator** **Account** with user name `hans.admin` and
 password `p@assw0rt` is present in every initialized environment. Initialization MUST be idempotent:
 running it against a database that already holds the **Seed Administrator** MUST NOT create a second
@@ -38,6 +40,7 @@ Then he is signed in as an administrator
 ```
 
 ### Requirement: Removal is always a Soft Delete
+
 Every delete of an **Account** or a **Note** SHALL be recorded as a **Soft Delete**. Soft-deleted
 records MUST be absent from every read path, including owner listings, administrator listings and the
 **Public Feed**. The platform MUST NOT expose an operation that permanently removes an **Account** or a
@@ -61,6 +64,7 @@ Then the note titled "Draft" is absent from the results
 ```
 
 ### Requirement: Records carry autoincrement integer identifiers
+
 Every **Account**, **Note** and **Tag** SHALL be identified by an integer assigned by the database in
 increasing order. Identifiers MUST NOT be reused after a **Soft Delete**.
 
@@ -74,6 +78,7 @@ Then the identifier of "Second" is greater than the identifier of "First"
 ```
 
 ### Requirement: The API reports its readiness
+
 The API SHALL expose an unauthenticated health check reporting whether the database is reachable, so
 the **Acceptance Suite** can wait for a usable platform before running scenarios.
 

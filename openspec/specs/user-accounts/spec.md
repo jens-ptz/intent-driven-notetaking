@@ -1,12 +1,14 @@
 # user-accounts Specification
 
 ## Purpose
+
 Self-service registration, the **Account** holder's own profile, and self-deletion with its cascade and
 identity release.
 
 ## Requirements
 
 ### Requirement: Visitors register their own Account
+
 A visitor SHALL create an **Account** by supplying first name, last name, email, user name and password.
 Registration MUST be refused when the email or the user name is already held by a **Live Row**, when the
 email is malformed, or when the password is shorter than 8 characters. A newly registered **Account**
@@ -56,6 +58,7 @@ Then his account holds the user role only
 ```
 
 ### Requirement: Account holders manage their own profile
+
 A signed-in **Registered User** SHALL read their own profile and update their first name, last name and
 user name. A profile MUST NOT expose the stored password in any form. A **Registered User** MUST NOT be
 able to change their own **Role** set.
@@ -87,6 +90,7 @@ And she still holds the user role only
 ```
 
 ### Requirement: Self-deletion cascades to the holder's Notes
+
 A signed-in **Registered User** SHALL delete their own **Account**. Deleting an **Account** MUST apply a
 **Soft Delete** to every **Note** that **Account** owns, including published ones, which MUST therefore
 leave the **Public Feed** immediately. The deleted holder MUST NOT be able to sign in afterwards.
@@ -108,6 +112,7 @@ Then "Rust notes" is absent from the public feed
 ```
 
 ### Requirement: A deleted identity is released for reuse
+
 Email and user name uniqueness SHALL apply only among **Live Rows**. After an **Account** is
 soft-deleted, its email and user name MUST become available for a new registration, and the new
 **Account** MUST NOT inherit any **Note** of the deleted one.

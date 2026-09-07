@@ -1,6 +1,7 @@
 # web-client Specification
 
 ## Purpose
+
 The browser-observable behaviour of the React single-page application. These scenarios are executed
 through a real browser; the API-level rules they rely on are specified by the other capabilities and are
 not restated here.
@@ -8,6 +9,7 @@ not restated here.
 ## Requirements
 
 ### Requirement: A visitor browses the Public Feed without signing in
+
 The landing page SHALL show the **Public Feed** to a visitor holding no **Account**, and opening an
 entry SHALL show that **Note**'s title, rendered markdown body and **Tags**. Markdown MUST be rendered
 without executing author-supplied scripts or embedded HTML, because the body of a published **Note** is
@@ -40,6 +42,7 @@ And its markup is not added to the page
 ```
 
 ### Requirement: A visitor registers and signs in from the browser
+
 The application SHALL offer registration and sign-in forms, sign the **Registered User** in on success,
 and show a message explaining the refusal on failure without clearing what was typed into the identifier
 field. Signing out SHALL return the browser to the anonymous **Public Feed**.
@@ -72,6 +75,7 @@ And no note list is offered
 ```
 
 ### Requirement: A Registered User works with their own Notes in the browser
+
 The note list SHALL show only the signed-in **Registered User**'s **Notes** with each one's
 **Publication State**, and SHALL offer creating, opening and deleting a **Note**.
 
@@ -93,6 +97,7 @@ Then "Shopping list" is no longer listed
 ```
 
 ### Requirement: The editor writes markdown, Tags and Publication Requests
+
 Editing a **Note** SHALL offer a markdown editor with a live preview of the rendered result, a way to
 enter **Tags** as free text, and a way to submit a **Publication Request**. After submitting, the
 application SHALL show that the **Note** is pending, and after a rejection it SHALL show the reason the
@@ -132,6 +137,7 @@ Then she is shown the rejection reason "needs a summary"
 ```
 
 ### Requirement: The admin area is gated on the admin Role
+
 The application SHALL offer an administration area holding the **Moderation Queue**, an **Account** list
 supporting **Ban**, unban and delete, and a browser over every **Note**. It MUST be reachable only by a
 **Registered User** holding the admin **Role**; anyone else MUST be refused rather than shown an empty

@@ -1,12 +1,14 @@
 # authentication Specification
 
 ## Purpose
+
 Signing in with either identifier, the **Access Token Cookie** that carries the session, and immediate
 rejection of banned or deleted **Accounts**.
 
 ## Requirements
 
 ### Requirement: Sign-in accepts either email or user name
+
 The platform SHALL accept a single identifier at sign-in and resolve it against both the email and the
 user name of **Live Rows**. Sign-in MUST be refused for an unknown identifier, a wrong password, a
 deleted **Account** and a banned **Account**. The refusal for an unknown identifier and the refusal for
@@ -55,6 +57,7 @@ Then sign-in is refused
 ```
 
 ### Requirement: A session is carried by the Access Token Cookie
+
 On successful sign-in the platform SHALL issue an **Access Token Cookie** that the browser returns
 automatically on subsequent requests. The cookie MUST NOT be readable by page scripts. Requests to
 protected operations without a valid cookie MUST be refused as unauthenticated. Signing out MUST clear
@@ -86,6 +89,7 @@ Then the request is refused as unauthenticated
 ```
 
 ### Requirement: Bans and deletions take effect on the next request
+
 The **Auth Guard** SHALL re-check the **Account** behind the **Access Token Cookie** on every
 authenticated request. A **Registered User** who is banned or deleted while holding a valid cookie MUST
 be refused on their very next request, without waiting for the cookie to expire.

@@ -1,12 +1,14 @@
 # note-publication Specification
 
 ## Purpose
+
 How a private **Note** reaches the **Public Feed**: the **Owner**'s **Publication Request**, the
 **Administrator**'s decision, and the visibility rules the feed enforces on every read.
 
 ## Requirements
 
 ### Requirement: An Owner requests publication
+
 An **Owner** SHALL request publication of a **Note** they own, moving its **Publication State** from
 private to pending. A pending **Note** MUST NOT appear on the **Public Feed**. Requesting publication of
 a **Note** owned by someone else MUST be refused, and requesting publication of a **Note** that is
@@ -46,6 +48,7 @@ Then the request is refused as redundant
 ```
 
 ### Requirement: An Administrator approves or rejects a Publication Request
+
 An **Administrator** SHALL approve or reject any pending **Note**. Approval MUST move the **Note** to
 published and MUST make it visible on the **Public Feed**. Rejection MUST return the **Note** to private,
 MUST record the reason supplied by the **Administrator**, and the **Owner** MUST be able to read that
@@ -79,6 +82,7 @@ And the note is still pending publication
 ```
 
 ### Requirement: Editing a published Note returns it to moderation
+
 Changing the title, body text or **Tags** of a published **Note** SHALL return it to the pending
 **Publication State** and remove it from the **Public Feed** until an **Administrator** approves it
 again. Without this rule an **Owner** could publish acceptable content and then replace it, so the
@@ -102,6 +106,7 @@ Then "Rust notes" is listed on the public feed again
 ```
 
 ### Requirement: A published Note can be withdrawn
+
 An **Owner** SHALL withdraw their own published **Note**, and an **Administrator** SHALL withdraw any
 published **Note**. Withdrawal MUST return the **Publication State** to private and MUST remove the
 **Note** from the **Public Feed** without deleting it.
@@ -126,6 +131,7 @@ And the note is still in Priya's note list
 ```
 
 ### Requirement: The Public Feed is readable without an Account
+
 The **Public Feed** and each published **Note** on it SHALL be readable by a visitor holding no
 **Account** and no session. The feed MUST list exactly those **Notes** that are published, not
 soft-deleted, and whose **Owner** is neither banned nor deleted.

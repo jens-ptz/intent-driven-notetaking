@@ -1,12 +1,14 @@
 # platform-administration Specification
 
 ## Purpose
+
 What holding the admin **Role** grants: reach across every **Note**, the **Moderation Queue** as a
 worklist, and **Ban** / unban / delete over every **Account**.
 
 ## Requirements
 
 ### Requirement: An Administrator reaches every Note
+
 An **Administrator** SHALL list, read, update and delete any **Note** regardless of its **Owner** or
 **Publication State**, excluding soft-deleted ones. An **Administrator**'s update MUST follow the same
 rules as an **Owner**'s: supplying **Tags** replaces the whole set, and changing the content of a
@@ -65,6 +67,7 @@ Then the note carries only the tag "reviewed"
 ```
 
 ### Requirement: The Moderation Queue lists work awaiting a decision
+
 An **Administrator** SHALL retrieve the **Moderation Queue**, holding exactly those **Notes** whose
 **Publication State** is pending, oldest request first. Private, published and soft-deleted **Notes**
 MUST be absent from it.
@@ -89,6 +92,7 @@ Then "Rust notes" is listed before "Marek's plan"
 ```
 
 ### Requirement: An Administrator bans and unbans Accounts
+
 An **Administrator** SHALL apply a reversible **Ban** to any other **Account** and SHALL lift it again.
 A **Ban** MUST block the banned **Registered User** from signing in and from every authenticated
 operation, and MUST hide their published **Notes** from the **Public Feed** without deleting anything.
@@ -121,6 +125,7 @@ And Hans can still sign in
 ```
 
 ### Requirement: An Administrator deletes Accounts
+
 An **Administrator** SHALL delete any other **Account**, with the same cascade as self-deletion: every
 **Note** owned by that **Account** is soft-deleted and leaves the **Public Feed**, and the released
 email and user name become available again. An **Administrator** MUST NOT be able to delete their own
@@ -144,6 +149,7 @@ Then the attempt is refused
 ```
 
 ### Requirement: Administration is closed to everyone else
+
 Every administration operation SHALL be refused for an unauthenticated visitor and for a signed-in
 **Registered User** who does not hold the admin **Role**. A refusal MUST NOT reveal any of the data the
 operation would have returned.
